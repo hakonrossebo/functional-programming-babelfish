@@ -10,7 +10,7 @@ Please contribute! I am not an expert in these languages. Please contribute to i
 
 | Concept | Name | Purescript | Haskell | Elm | F# |
 ----------|------|------------|---------|-----|----|
-Forward function application|Apply/Pipe|```#```|```see below```|```|>```|```|>```|
+Forward function application|Apply/Pipe|```#```|```&```|```|>```|```|>```|
 Function application|Apply/Pipe|```$```|```$```|```<|```|```<|```|
 Composition|Forward/right|```>>>```|```>>>```|```>>```|```>>```|
 Composition|Backward/left|```<<<```|```.```|```<<```|```<<```|
@@ -40,7 +40,7 @@ Concat||``` ```|``` ```|``` ```|``` ```|
 | Language | Syntax |
 |----------|--------|
 Purescript | ```# ```
-Haskell | ```Reverse $ instead ```
+Haskell | ```& ```
 Elm | ```|> ```
 F# | ```|> ```
 
