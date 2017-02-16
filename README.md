@@ -23,9 +23,9 @@ Record types||```data Point = Point { x :: Int, y :: Int}```|``` data Point = Po
 Union types||<code>data Shape Circle Point Int &#124; Line Point Point</code>|<code>data Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle of Point * int &#124; Line of Point * Point</code>|
 Maybe / Option||```Maybe, Just, Nothing```|```Maybe, Just, Nothing```|```Maybe, Just, Nothing```|```Option, Some, None```|
 Either / Result||```Either, Left, Right```|```Either, Left, Right```|```Result, Err, Ok```|``` ```|
-Functor map|Map|```<$>```|```<$>```|```.map```|```.map```|
+Functor map|Map|```<$>```|```<$>```|```map```|```map```|
 Functor apply|Apply|```<*>```|```<*>```|``` ```|``` ```|
-Functor lift||``` ```|``` liftN```|```.mapN```|```mapN```|
+Functor lift||``` ```|``` liftN```|```mapN```|```mapN```|
 Bind||```>>=```|```>>=```|```andThen```|```bind?```|
 Pattern matching||``` ```|``` ```|``` ```|``` ```|
 Let In /Where||``` ```|``` ```|``` ```|``` ```|
