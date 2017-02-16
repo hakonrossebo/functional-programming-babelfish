@@ -21,8 +21,8 @@ Functor map|Map|```<$>```|```<$>```|```.map```|```.map```|
 Functor apply|Apply|```<*>```|```<*>```|```.mapN?```|```mapN?```|
 Bind||```>>=```|```>>=```|```andThen```|```bind?```|
 Union types||``` ```|```data Shape = ```|```type Shape = ```|``` ```|
-Union types cont||``` ```|```  Circle Point```|```Circle \| Line ```|``` ```|
-Union types cont||``` ```|```\| Line ```|```\| Line Rect```|``` ```|
+Union types cont||``` ```|```Circle Point```|```Circle \| Line ```|``` ```|
+Union types cont||``` ```|```&#124; Line ```|```&#124; Line Rect```|``` ```|
 Record types||```data Point = Point```|``` ```|``` ```|``` ```|
 Record types||```{x::number, y::number} ```|``` ```|``` ```|``` ```|
 
