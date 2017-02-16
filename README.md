@@ -93,5 +93,38 @@ street <| address <| boss employee
 
 Todo: More details for other concepts. Also happy to receive help with other languages.
 
+### Unit type
+### Anonymous function
+### Identity function
+### Tuple
+### Record types
+### Union types
+### Maybe / Option
+### Either / Result
+### Functor map
+### Functor apply
+### Functor lift
+### Bind
+### Pattern matching
+### Let In /Where
+### Lists
+### Concat
+
+------------------------
+### (Template)
+
+| Language | Syntax |
+|----------|--------|
+Purescript | ``` ```
+Haskell | ``` ```
+Elm | ``` ```
+F# | ``` ```
+Elixir | ``` ```
+
+
+#### Notes/links
+* []()
+* []()
+
 ### Other sites with related content
 [https://github.com/hemanth/functional-programming-jargon](https://github.com/hemanth/functional-programming-jargon)
