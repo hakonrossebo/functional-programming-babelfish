@@ -64,7 +64,7 @@ result = 100 |> function1 |> function2
 | Language | Syntax |
 |----------|--------|
 Purescript | ```# ```
-Haskell | ```Reverse $ instead ```
+Haskell | ```$ ```
 Elm | ```|> ```
 F# | ```|> ```
 
