@@ -12,8 +12,33 @@ Forward function application|Apply/Pipe|```#```|```see below```|```|>```|```|>``
 Function application|Apply/Pipe|```$```|```$```|```<|```|```<|```|
 Composition|Forward/right|```>>>```|```>>>```|```>>```|```>>```|
 Composition|Backward/left|```<<<```|```.```|```<<```|```<<```|
+Unit type|Empty|```Unit```|```()```|```()```|```()```|
+Anonymous function|Lambda|```(\x -> x + 1)```|```(\x -> x + 1)```|```(\x -> x + 1)```|```(fun x -> x + 1)```|
+Identity function||```id```|```id```|```identity```|```id```|
+Tuple|Definition|```Tuple a b```|```(Integer, String)```|```(Int, String)```|```int * string```|
+Tuple|Usage|```Tuple 2 "Test"```|```(2, "Test")```|```(2, "Test")```|```(2, "Test")```|
+Functor map|Map|```<$>```|```<$>```|```.map```|```.map```|
+Functor apply|Apply|```<*>```|```<*>```|```.mapN?```|```mapN?```|
+Bind||```>>=```|```>>=```|```andThen```|```bind?```|
+Union types||``` ```|```data Shape = ```|```type Shape = ```|``` ```|
+Union types cont||``` ```|```  Circle Point```|```Circle \| Line ```|``` ```|
+Union types cont||``` ```|```\| Line ```|```\| Line Rect```|``` ```|
+Record types||```data Point = Point```|``` ```|``` ```|``` ```|
+Record types||```{x::number, y::number} ```|``` ```|``` ```|``` ```|
 
-# Details
+* Todo:
+* Maybe
+* Either/result
+* Pattern matching
+* Let In / Where
+* Concat
+* Lists
+
+
+
+||``` ```|``` ```|``` ```|``` ```|
+
+# Concepts
 ## Function application
 ### Forwards function application / Piping
 
@@ -32,6 +57,12 @@ F#
 ( |> ) : 'T1 -> ('T1 -> 'U) -> 'U
 let result = 100 |> function1 |> function2
 202
+
+Elm
+(|>) : a -> (a -> b) -> b
+result = 100 |> function1 |> function2
+202
+
 ```
 ### Backwards function application / Backward Piping
 
@@ -48,16 +79,17 @@ F# | ```|> ```
 * [https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/symbol-and-operator-reference/](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/symbol-and-operator-reference/)
 
 ```
-Purescript:apply :: forall a b. (a -> b) -> a -> b
+Purescript:
+apply :: forall a b. (a -> b) -> a -> b
 apply f x = f x
 street (address (boss employee))
 street $ address $ boss employee
 
-Haskell
+Haskell:
 ($) :: (a -> b) -> a -> b
 F x = f x
 
-F# : Passes the result of the expression on the right side to the function on left side
+F#: Passes the result of the expression on the right side to the function on left side
 ( <| ) : ('T -> 'U) -> 'T -> 'U
 (backward pipe operator)
 street (address (boss employee))
