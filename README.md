@@ -7,8 +7,9 @@ Please contribute! I am not an expert in these languages. Please contribute to i
 
 # Cheat sheet - condensed overview
 (See below for more languages and details)
+
 | Concept | Name | Purescript | Haskell | Elm | F# |
-----------|---------------------|------------|---------|-----|----|-------|
+----------|------|------------|---------|-----|----|
 Forward function application|Apply/Pipe|```#```|```see below```|```|>```|```|>```|
 Function application|Apply/Pipe|```$```|```$```|```<|```|```<|```|
 Composition|Forward/right|```>>>```|```>>>```|```>>```|```>>```|
