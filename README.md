@@ -24,9 +24,9 @@ Union types||<code>data Shape Circle Point Int &#124; Line Point Point</code>|<c
 Maybe / Option||```Maybe, Just, Nothing```|```Maybe, Just, Nothing```|```Maybe, Just, Nothing```|```Option, Some, None```|
 Either / Result||```Either, Left, Right```|```Either, Left, Right```|```Result, Err, Ok```|``` ```|
 Functor map|Map|```<$>```|```<$>```|```map```|```map```|
-Functor apply|Apply|```<*>```|```<*>```|``` ```|``` ```|
+Functor apply|Apply|```<*>```|```<*>```|``` ```|```apply ```|
 Functor lift||``` ```|``` liftN```|```mapN```|```mapN```|
-Bind||```>>=```|```>>=```|```andThen```|```bind?```|
+Bind||```>>=```|```>>=```|```andThen```|```bind```|
 Pattern matching||``` ```|``` ```|``` ```|``` ```|
 Let In /Where||``` ```|``` ```|``` ```|``` ```|
 Lists||``` ```|``` ```|``` ```|``` ```|
