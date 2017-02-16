@@ -20,11 +20,9 @@ Tuple|Usage|```Tuple 2 "Test"```|```(2, "Test")```|```(2, "Test")```|```(2, "Tes
 Functor map|Map|```<$>```|```<$>```|```.map```|```.map```|
 Functor apply|Apply|```<*>```|```<*>```|```.mapN?```|```mapN?```|
 Bind||```>>=```|```>>=```|```andThen```|```bind?```|
-Union types||```data Shape ```|```data Shape = ```|```type Shape = ```|``` ```|
-Union types cont||```Circle Point ```|```Circle Point```|```Circle```|``` ```|
-Union types cont||<code>&#124; Line Number Number</code>|<code>&#124; Line Number Number</code>|<code>&#124; Line Int Int</code>|``` ```|
-Record types||```data Point = Point```|``` ```|``` ```|``` ```|
-Record types||```{x::Number, y::Number} ```|``` ```|``` ```|``` ```|
+Record types||```data Point = Point { x :: Number, y :: Number}```|``` ```|```type alias Point = { x : Int; y : Int}```|```type Point = { x : int; y : int}```|
+Union types||<code>data Shape Circle Point Number &#124; Line Point Point</code>|<code>data Shape = Circle Point Number &#124; Line Point Point</code>|<code>type Shape = Circle Point &#124; Line Int Int</code>|<code>type Shape = Circle of Point * int &#124; Line of Point * Point</code>|
+
 
 * Todo:
 * Maybe
