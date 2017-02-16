@@ -20,11 +20,11 @@ Tuple|Usage|```Tuple 2 "Test"```|```(2, "Test")```|```(2, "Test")```|```(2, "Tes
 Functor map|Map|```<$>```|```<$>```|```.map```|```.map```|
 Functor apply|Apply|```<*>```|```<*>```|```.mapN?```|```mapN?```|
 Bind||```>>=```|```>>=```|```andThen```|```bind?```|
-Union types||``` ```|```data Shape = ```|```type Shape = ```|``` ```|
-Union types cont||``` ```|```Circle Point```|```Circle \| Line ```|``` ```|
-Union types cont||``` ```|```&#124; Line ```|```&#124; Line Rect```|``` ```|
+Union types||```data Shape ```|```data Shape = ```|```type Shape = ```|``` ```|
+Union types cont||```Circle Point ```|```Circle Point```|```Circle```|``` ```|
+Union types cont||<code>&#124; Line Number Number</code>|<code>&#124; Line Number Number</code>|<code>&#124; Line Int Int</code>|``` ```|
 Record types||```data Point = Point```|``` ```|``` ```|``` ```|
-Record types||```{x::number, y::number} ```|``` ```|``` ```|``` ```|
+Record types||```{x::Number, y::Number} ```|``` ```|``` ```|``` ```|
 
 * Todo:
 * Maybe
