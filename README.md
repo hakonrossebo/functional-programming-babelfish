@@ -21,7 +21,7 @@ Tuple|Definition|```Tuple a b```|```(Int, String)```|```(Int, String)```|```int 
 Tuple|Usage|```Tuple 2 "Test"```|```(2, "Test")```|```(2, "Test")```|```(2, "Test")```|
 Record types||```data Point = Point { x :: Int, y :: Int}```|``` data Point = Point { x :: Int, y :: Int}```|```type alias Point = { x : Int, y : Int}```|```type Point = { x : int; y : int}```|
 Union types||<code>data Shape Circle Point Int &#124; Line Point Point</code>|<code>data Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle of Point * int &#124; Line of Point * Point</code>|
-Maybe / Option||```Maybe, Just, Nothing```|```Maybe, Just, Nothing```|```Maybe, Just, Nothing```|```Option, Some, None```|
+Maybe / Option||```data Maybe a = Just a | Nothing```|```data Maybe a = Just a | Nothing```|```type Maybe a = Just a | Nothing```|```type Option<'a> = | Some of 'a | None```|
 Either / Result||```Either, Left, Right```|```Either, Left, Right```|```Result, Err, Ok```|``` ```|
 Functor map|Map|```<$>```|```<$>```|```map```|```map```|
 Functor apply|Apply|```<*>```|```<*>```|``` ```|```apply ```|
