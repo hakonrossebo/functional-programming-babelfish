@@ -15,7 +15,7 @@ Function application|Apply/Pipe|```$```|```$```|```<|```|```<|```|
 Composition|Forward/right|```>>>```|```>>>```|```>>```|```>>```|
 Composition|Backward/left|```<<<```|```.```|```<<```|```<<```|
 Unit type|Empty|```Unit```|```()```|```()```|```()```|
-Anonymous function|Lambda|```(\x -> x + 1)```|```(\x -> x + 1)```|```(\x -> x + 1)```|```(fun x -> x + 1)```|
+Anonymous function|Lambda|```\x -> x + 1```|```\x -> x + 1```|```\x -> x + 1```|```fun x -> x + 1```|
 Identity function||```id```|```id```|```identity```|```id```|
 Tuple|Definition|```Tuple a b```|```(Int, String)```|```(Int, String)```|```int * string```|
 Tuple|Usage|```Tuple 2 "Test"```|```(2, "Test")```|```(2, "Test")```|```(2, "Test")```|
