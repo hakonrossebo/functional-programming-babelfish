@@ -10,10 +10,10 @@ Please contribute! I am not an expert in these languages. Please contribute to i
 
 | Concept | Name | Purescript | Haskell | Elm | F# |
 ----------|------|------------|---------|-----|----|
-Forward function application|Apply/Pipe|```#```|```&```|```|>```|```|>```|
-Function application|Apply/Pipe|```$```|```$```|```<|```|```<|```|
-Composition|Forward/right|```>>>```|```>>>```|```>>```|```>>```|
-Composition|Backward/left|```<<<```|```.```|```<<```|```<<```|
+Forward function application|Apply/Pipe|```#, applyFlipped```|```&```|```|>```|```|>```|
+Function application|Apply/Pipe|```$, apply```|```$```|```<|```|```<|```|
+Composition|Forward/right|```>>>, composeFlipped```|```>>>```|```>>```|```>>```|
+Composition|Backward/left|```<<<, compose```|```.```|```<<```|```<<```|
 Unit type|Empty|```Unit```|```()```|```()```|```()```|
 Anonymous function|Lambda|```\x -> x + 1```|```\x -> x + 1```|```\x -> x + 1```|```fun x -> x + 1```|
 Identity function||```id```|```id```|```identity```|```id```|
@@ -23,10 +23,10 @@ Record types||```data Point = Point { x :: Int, y :: Int}```|``` data Point = Po
 Union types||<code>data Shape Circle Point Int &#124; Line Point Point</code>|<code>data Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle of Point * int &#124; Line of Point * Point</code>|
 Maybe / Option||<code>data Maybe a = Just a &#124; Nothing</code>|<code>data Maybe a = Just a &#124; Nothing</code>|<code>type Maybe a = Just a &#124; Nothing</code>|<code>type Option<'a> = &#124; Some of 'a &#124; None</code>|
 Either / Result||<code>data Either a b = Left a &#124;  Right b</code>|<code>data Either a b = Left a &#124;  Right b</code>|<code>type Result error value = Ok value &#124; Err error</code>|<code>(in F# 4.1) type Result<'T,'TError> = &#124; Ok of 'T &#124; Error of 'TError</code>|
-Functor map|Map|```<$>```|```<$>, fmap```|```map```|```map```|
-Functor apply|Apply|```<*>```|```<*>```|``` ```|```apply ```|
-Functor lift||``` ```|``` liftN```|```mapN```|```mapN```|
-Bind||```>>=```|```>>=```|```andThen```|```bind```|
+Functor map|Map|```<$>, map```|```<$>, fmap```|```map```|```map```|
+Functor apply|Apply|```<*>, apply```|```<*>```|``` ```|```apply ```|
+Functor lift||```liftN```|``` liftN```|```mapN```|```mapN```|
+Bind||```>>=, bind```|```>>=```|```andThen```|```bind```|
 Pattern matching||``` ```|``` ```|``` ```|``` ```|
 Let In /Where||``` ```|``` ```|``` ```|``` ```|
 Lists||``` ```|``` ```|``` ```|``` ```|
