@@ -23,7 +23,7 @@ Record types||```data Point = Point { x :: Int, y :: Int}```|``` data Point = Po
 Union types||<code>data Shape Circle Point Int &#124; Line Point Point</code>|<code>data Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle Point Int &#124; Line Point Point</code>|<code>type Shape = Circle of Point * int &#124; Line of Point * Point</code>|
 Maybe / Option||<code>data Maybe a = Just a &#124; Nothing</code>|<code>data Maybe a = Just a &#124; Nothing</code>|<code>type Maybe a = Just a &#124; Nothing</code>|<code>type Option<'a> = &#124; Some of 'a &#124; None</code>|
 Either / Result||<code>data Either a b = Left a &#124;  Right b</code>|<code>data Either a b = Left a &#124;  Right b</code>|<code>type Result error value = Ok value &#124; Err error</code>|``` ```|
-Functor map|Map|```<$>```|```<$>```|```map```|```map```|
+Functor map|Map|```<$>```|```<$>, fmap```|```map```|```map```|
 Functor apply|Apply|```<*>```|```<*>```|``` ```|```apply ```|
 Functor lift||``` ```|``` liftN```|```mapN```|```mapN```|
 Bind||```>>=```|```>>=```|```andThen```|```bind```|
