@@ -39,7 +39,7 @@ Concat||``` ```|``` ```|``` ```|``` ```|
 
 | Language | Syntax |
 |----------|--------|
-Purescript | ```# ```
+Purescript | ```#, applyFlipped ```
 Haskell | ```& ```
 Elm | ```|> ```
 F# | ```|> ```
@@ -63,7 +63,7 @@ result = 100 |> function1 |> function2
 
 | Language | Syntax |
 |----------|--------|
-Purescript | ```$```
+Purescript | ```$, apply```
 Haskell | ```$```
 Elm | ```<|```
 F# | ```<|```
