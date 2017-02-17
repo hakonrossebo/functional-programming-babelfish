@@ -63,10 +63,10 @@ result = 100 |> function1 |> function2
 
 | Language | Syntax |
 |----------|--------|
-Purescript | ```# ```
-Haskell | ```$ ```
-Elm | ```|> ```
-F# | ```|> ```
+Purescript | ```$```
+Haskell | ```$```
+Elm | ```<|```
+F# | ```<|```
 
 
 #### Notes/links
