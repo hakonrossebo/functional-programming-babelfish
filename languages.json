@@ -1,0 +1,397 @@
+	[
+		{
+			"name": "Forward function application",
+			"description": "Apply / Pipe",
+			"index": 0,
+			"notes": "A simple note on function application",
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "#, applyFlipped"
+				},
+				{
+					"name": "Haskell",
+					"code": "&"
+				},
+				{
+					"name": "Elm",
+					"code": "|>",
+					"example": "(|>) : a -> (a -> b) -> b\nresult = \n100\n  |> function1\n  |> function2\n202"
+				},				{
+					"name": "F#",
+					"code": "|>",
+					"example": "( |> ) : 'T1 -> ('T1 -> 'U) -> 'U let result = 100 |> function1 |> function2 202"
+				}
+			],
+			"links": [
+				{
+					"url": "http://stackoverflow.com/questions/1457140/haskell-composition-vs-fs-pipe-forward-operator",
+					"description": "Stack Overflow discussion"
+				}
+			]
+		},
+		{
+			"name": "Backward function application",
+			"description": "Apply / Pipe",
+			"index": 1,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "$, apply",
+					"example": "apply :: forall a b. (a -> b) -> a -> b apply f x = f x street (address (boss employee)) street $ address $ boss employee"
+				},
+				{
+					"name": "Haskell",
+					"code": "$",
+					"example": "($) :: (a -> b) -> a -> b F x = f x"
+				},
+				{
+					"name": "Elm",
+					"code": "<|"
+				},				{
+					"name": "F#",
+					"code": "<|",
+					"example": "( <| ) : ('T -> 'U) -> 'T -> 'U (backward pipe operator) street (address (boss employee)) street <| address <| boss employee"
+				}
+			],
+			"links": [
+				{
+					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/functions/index",
+					"description": "F# functions reference"
+				},
+				{
+					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/symbol-and-operator-reference/",
+					"description": "F# operator reference"
+				}
+			]
+		},
+		{
+			"name": "Composition",
+			"description": "Forward/right",
+			"index": 2,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": ">>>, composeFlipped"
+				},
+				{
+					"name": "Haskell",
+					"code": ">>>"
+				},
+				{
+					"name": "Elm",
+					"code": ">>"
+				},				{
+					"name": "F#",
+					"code": ">>"
+				}
+			]
+		},
+		{
+			"name": "Composition",
+			"description": "Backward/left",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "<<<, compose"
+				},
+				{
+					"name": "Haskell",
+					"code": "."
+				},
+				{
+					"name": "Elm",
+					"code": "<<"
+				},				{
+					"name": "F#",
+					"code": "<<"
+				}
+			]
+		},
+		{
+			"name": "Unit type",
+			"description": "Empty",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "Unit"
+				},
+				{
+					"name": "Haskell",
+					"code": "()"
+				},
+				{
+					"name": "Elm",
+					"code": "()"
+				},				{
+					"name": "F#",
+					"code": "()"
+				}
+			]
+		},
+		{
+			"name": "Anonymous function",
+			"description": "Lambda",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "\\x -> x + 1"
+				},
+				{
+					"name": "Haskell",
+					"code": "\\x -> x + 1"
+				},
+				{
+					"name": "Elm",
+					"code": "\\x -> x + 1"
+				},				{
+					"name": "F#",
+					"code": "fun x -> x + 1"
+				}
+			]
+		},
+		{
+			"name": "Identity function",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "id"
+				},
+				{
+					"name": "Haskell",
+					"code": "id"
+				},
+				{
+					"name": "Elm",
+					"code": "identity"
+				},				{
+					"name": "F#",
+					"code": "id"
+				}
+			]
+		},
+		{
+			"name": "Tuple",
+			"description": "Definition",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "Tuple a b"
+				},
+				{
+					"name": "Haskell",
+					"code": "(Int, String)"
+				},
+				{
+					"name": "Elm",
+					"code": "(Int, String)"
+				},				{
+					"name": "F#",
+					"code": "inx * string"
+				}
+			]
+		},
+		{	"name": "Tuple",
+			"description": "Usage",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "Tuple 2 \"Test\""
+				},
+				{
+					"name": "Haskell",
+					"code": "(2, \"Test\")"
+				},
+				{
+					"name": "Elm",
+					"code": "(2, \"Test\")"
+				},				{
+					"name": "F#",
+					"code": "(2, \"Test\")"
+				}
+			]
+		},
+		{
+			"name": "Record types",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "type Point = { x :: Int, y :: Int}"
+				},
+				{
+					"name": "Haskell",
+					"code": "data Point = Point { x :: Int, y :: Int}"
+				},
+				{
+					"name": "Elm",
+					"code": "type alias Point = { x : Int, y : Int}"
+				},				{
+					"name": "F#",
+					"code": "type Point = {\r x : int; y : int}"
+				}
+			]
+		},
+		{
+			"name": "Union types",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "data Shape Circle Point Int | Line Point Point"
+				},
+				{
+					"name": "Haskell",
+					"code": "data Shape = Circle Point Int | Line Point Point"
+				},
+				{
+					"name": "Elm",
+					"code": "type Shape = Circle Point Int | Line Point Point"
+				},				{
+					"name": "F#",
+					"code": "type Shape = Circle of Point * int | Line of Point * Point"
+				}
+			]
+		},
+		{
+			"name": "Maybe/Option",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "data Maybe a = Just a | Nothing"
+				},
+				{
+					"name": "Haskell",
+					"code": "data Maybe a = Just a | Nothing"
+				},
+				{
+					"name": "Elm",
+					"code": "type Maybe a = Just a | Nothing"
+				},				{
+					"name": "F#",
+					"code": "type Option<'a> = | Some of 'a | None"
+				}
+			]
+	 	},
+		{
+			"name": "Either / Result",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "data Either a b = Left a | Right b"
+				},
+				{
+					"name": "Haskell",
+					"code": "data Either a b = Left a | Right b"
+				},
+				{
+					"name": "Elm",
+					"code": "type Result error value = Ok value | Err error"
+				},				{
+					"name": "F#",
+					"code": "(in F# 4.1) type Result<'T,'TError> = | Ok of 'T | Error of 'TError"
+				}
+			]
+		},
+		{
+			"name": "Functor map",
+			"description": "Map",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "<$>, map"
+				},
+				{
+					"name": "Haskell",
+					"code": "<$>, fmap"
+				},
+				{
+					"name": "Elm",
+					"code": "map"
+				},				{
+					"name": "F#",
+					"code": "map"
+				}
+			]
+		},
+		{
+			"name": "Functor apply",
+			"description": "Apply",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "<*>, apply"
+				},
+				{
+					"name": "Haskell",
+					"code": "<*>"
+				},
+				{
+					"name": "Elm",
+					"code": ""
+				},				{
+					"name": "F#",
+					"code": "apply"
+				}
+			]
+		},
+		{
+			"name": "Functor lift",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "liftN"
+				},
+				{
+					"name": "Haskell",
+					"code": "liftN"
+				},
+				{
+					"name": "Elm",
+					"code": "mapN"
+				},				{
+					"name": "F#",
+					"code": "mapN"
+				}
+			]
+		},
+		{
+			"name": "Bind",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": ">>=, bind"
+				},
+				{
+					"name": "Haskell",
+					"code": ">>="
+				},
+				{
+					"name": "Elm",
+					"code": "andThen"
+				},				{
+					"name": "F#",
+					"code": "bind"
+				}
+			]
+		}
+	]
