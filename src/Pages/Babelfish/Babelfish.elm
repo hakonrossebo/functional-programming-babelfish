@@ -40,6 +40,7 @@ type alias Model =
 type Msg
     = Mdl (Material.Msg Msg)
     | ConceptsResponse (WebData (List Concept))
+    | SelectLanguage String String
 
 
 subs : Model -> Sub Msg
@@ -50,7 +51,7 @@ init : Taco -> ( Model, Cmd Msg )
 init taco =
     let
         languages =
-            taco.availableLanguages
+            List.take 4 taco.availableLanguages
             |> List.map (\language -> language.name)
     in
     ( { mdl = Material.model
@@ -87,17 +88,31 @@ update msg model =
               (model_, cmd_, NoSharedMsg)
 
         ConceptsResponse response ->
-            ( { model | concepts = response, conceptLanguagesViewModel = createConceptLanguagesViewModel model response }, Cmd.none, NoSharedMsg)
+            ( { model | concepts = response, conceptLanguagesViewModel = createConceptLanguagesViewModel model.displayLanguages response }, Cmd.none, NoSharedMsg)
 
-createConceptLanguagesViewModel : Model -> WebData (List Concept) -> ConceptLanguagesViewModel
-createConceptLanguagesViewModel model concepts =
+        SelectLanguage currentLanguage language ->
+             let
+                 displayLanguages = updateDisplayLanguages currentLanguage language model.displayLanguages
+                 conceptLanguagesViewModel = createConceptLanguagesViewModel displayLanguages model.concepts
+             in
+             ( {model | displayLanguages = displayLanguages, conceptLanguagesViewModel = conceptLanguagesViewModel}, Cmd.none, NoSharedMsg)
+
+
+updateDisplayLanguages : String -> String -> List String -> List String
+updateDisplayLanguages currentLanguage newLanguage displayLanguages =
+    displayLanguages
+    |> List.map (\language -> if currentLanguage == language then newLanguage else language)
+
+
+createConceptLanguagesViewModel : List String -> WebData (List Concept) -> ConceptLanguagesViewModel
+createConceptLanguagesViewModel displayLanguages concepts =
     case concepts of
       Success data ->
         let
-            header = model.displayLanguages
+            header = displayLanguages
             rows =
               data
-              |> List.map (\concept -> createConceptLanguagesViewModelRow model.displayLanguages concept.languageImplementations concept.name concept.description )
+              |> List.map (\concept -> createConceptLanguagesViewModelRow displayLanguages concept.languageImplementations concept.name concept.description )
         in
           Created header rows
       _ ->
@@ -137,7 +152,7 @@ view taco model =
                 , Options.css "align-items" "left"
                 ]
                 [ showText div Typo.body1 "This is an attempt to provide a link and comparision between similar concepts and operations and their usage between different functional programming languages . When learning and working with different languages and concepts, it's nice to have an easy way of looking up the implementations. Please contribute! I am not an expert in these languages. Please contribute to improvements with PR's and issues to help improve this reference."
-                , viewConcepts model
+                , viewConcepts taco model
                 ]
             , cell
                 [ size All 12
@@ -165,18 +180,18 @@ white =
     Color.text Color.white
 
 
-viewConcepts : Model -> Html Msg
-viewConcepts model =
+viewConcepts : Taco -> Model -> Html Msg
+viewConcepts taco model =
     case model.conceptLanguagesViewModel of
         NotCreated ->
             text "Initialising."
         Created header rows ->
-            viewConceptsSuccess model header rows
+            viewConceptsSuccess taco model header rows
 
 
 
-viewConceptsSuccess : Model -> RowLanguageImplementations -> List (RowLanguageImplementations, RowLanguageImplementations) -> Html Msg
-viewConceptsSuccess model header rows =
+viewConceptsSuccess : Taco -> Model -> RowLanguageImplementations -> List (RowLanguageImplementations, RowLanguageImplementations) -> Html Msg
+viewConceptsSuccess taco model header rows =
     let
       descriptions =
                 [ Table.th
@@ -196,7 +211,7 @@ viewConceptsSuccess model header rows =
           |> toString
       languageNames =
           model.displayLanguages
-          |> List.indexedMap (\idx lang -> viewConceptLanguageHeader idx model languageColumnSize lang)
+          |> List.indexedMap (\idx lang -> viewConceptLanguageHeader idx taco model languageColumnSize lang)
     in
     Table.table [ css "table-layout" "fixed", css "width" "100%" ]
         -- Table.table [css "table-layout" "fixed", css "width" "100%"]
@@ -212,21 +227,28 @@ viewConceptsSuccess model header rows =
 
 
 
-viewLanguageSelectMenu : Int -> Model -> String -> Html Msg
-viewLanguageSelectMenu index model language =
+
+viewConceptLanguageHeader : Int -> Taco -> Model -> String -> String -> Html Msg
+viewConceptLanguageHeader index taco model size name =
+    Table.th [css "text-align" "left", css "width" size][viewLanguageSelectMenu index taco model name, showText span Typo.body2 name]
+
+viewLanguageSelectMenu : Int -> Taco -> Model -> String -> Html Msg
+viewLanguageSelectMenu index taco model language =
     Menu.render Mdl [index] model.mdl
       [ Menu.ripple, Menu.bottomLeft, Menu.icon "keyboard_arrow_down" ]
-      [ Menu.item
-          [ ] -- Menu.onSelect MySelectMsg0 ]
-          [ text "F#" ]
-      , Menu.item
-          [ ] -- Menu.onSelect MySelectMsg1 ]
-          [ text "Elm" ]
-      ]
+      (getMenuItems language taco model)
 
-viewConceptLanguageHeader : Int -> Model -> String -> String -> Html Msg
-viewConceptLanguageHeader index model size name =
-    Table.th [css "text-align" "left", css "width" size][viewLanguageSelectMenu index model name, showText span Typo.body2 name]
+getMenuItems : String -> Taco -> Model -> List (Menu.Item Msg)
+getMenuItems currentLanguage taco model =
+    taco.availableLanguages
+    |> List.filter (\availableLanguage -> not (List.any (\language -> language == availableLanguage.name) model.displayLanguages))
+    |> List.map (\language -> viewMenuItem currentLanguage language.name)
+
+viewMenuItem : String -> String -> Menu.Item Msg
+viewMenuItem currentLanguage newLanguage =
+    Menu.item
+            [ Menu.onSelect (SelectLanguage currentLanguage newLanguage) ]
+            [ text newLanguage ]
 
 
 viewFullConcepts : Model -> Html Msg

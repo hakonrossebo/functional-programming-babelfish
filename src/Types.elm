@@ -57,3 +57,8 @@ type alias RowLanguageImplementations = List String
 type ConceptLanguagesViewModel
     = NotCreated
     | Created RowLanguageImplementations (List (RowLanguageImplementations, RowLanguageImplementations))
+
+type alias LanguageMenuItem =
+    { name: String
+    , enabled: Bool
+    }

@@ -14,5 +14,9 @@
         {
             "name": "F#",
             "languageCode": "fsharp"
+        },
+        {
+            "name": "Empty",
+            "languageCode": "emptyslot"
         }
 ]
