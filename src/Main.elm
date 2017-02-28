@@ -8,6 +8,8 @@ import RemoteData exposing (RemoteData(..))
 import Routing.Router as Router
 import Http
 import Decoders
+import Material.Menu as Menu
+import Material
 
 main : Program Flags Model Msg
 main =
@@ -15,13 +17,30 @@ main =
         { init = init
         , update = update
         , view = view
-        , subscriptions = \_ -> Time.every Time.minute TimeChange
+        , subscriptions = subscriptions
         }
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    let
+      childSubscriptions =
+          case model.appState of
+              Ready taco routerModel ->
+                  Sub.map RouterMsg (Router.subs routerModel)
+              NotReady _ ->
+                  Sub.none
+    in
+      Sub.batch [ Time.every Time.minute TimeChange
+                , childSubscriptions
+                , Material.subscriptions Mdl model
+                ]
+
 type alias Model =
-    { appState : AppState
+    { mdl : Material.Model
+    , appState : AppState
     , location : Location
     }
+
 type AppState
     = NotReady Time
     | Ready Taco Router.Model
@@ -32,14 +51,16 @@ type alias Flags =
 
 
 type Msg
-    = UrlChange Location
+    = Mdl (Material.Msg Msg)
+    | UrlChange Location
     | TimeChange Time
     | RouterMsg Router.Msg
     | HandleAvailableLanguagesResponse (RemoteData.WebData (List Language))
 
 init : Flags -> Location -> ( Model, Cmd Msg )
 init flags location =
-    ( { appState = NotReady flags.currentTime
+    ( { mdl = Material.model
+      , appState = NotReady flags.currentTime
       , location = location
       }
       , fetchAvailableLanguages
@@ -66,6 +87,9 @@ fetchAvailableLanguages =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Mdl msg_ ->
+            Material.update Mdl msg_ model
+
         TimeChange time ->
             updateTime model time
 

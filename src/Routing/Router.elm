@@ -53,6 +53,18 @@ type Msg
     | BabelfishMsg Babelfish.Msg
 
 
+subs : Model -> Sub Msg
+subs model =
+    case model.route of
+        RouteBabelfish ->
+            Sub.map BabelfishMsg (Babelfish.subs model.babelfishModel)
+
+        RouteAbout ->
+            Sub.none
+
+        NotFoundRoute ->
+            Sub.none
+
 init : Location -> Taco -> ( Model, Cmd Msg )
 init location taco =
     let
@@ -315,3 +327,5 @@ helpDialog model =
                 ]
             ]
         ]
+
+

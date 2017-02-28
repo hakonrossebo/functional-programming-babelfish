@@ -10,6 +10,7 @@ import Material.Options as Options exposing (when, css, cs, Style, onClick)
 import Material.Typography as Typo
 import Material.Table as Table
 import Material.Dialog as Dialog
+import Material.Menu as Menu
 import RemoteData exposing (WebData, RemoteData(..))
 import Types exposing (..)
 import Decoders exposing (..)
@@ -40,6 +41,10 @@ type Msg
     = Mdl (Material.Msg Msg)
     | ConceptsResponse (WebData (List Concept))
 
+
+subs : Model -> Sub Msg
+subs model =
+    Menu.subs Mdl model.mdl
 
 init : Taco -> ( Model, Cmd Msg )
 init taco =
@@ -191,7 +196,7 @@ viewConceptsSuccess model header rows =
           |> toString
       languageNames =
           model.displayLanguages
-          |> List.map (\lang -> viewConceptLanguageHeader languageColumnSize lang)
+          |> List.indexedMap (\idx lang -> viewConceptLanguageHeader idx model languageColumnSize lang)
     in
     Table.table [ css "table-layout" "fixed", css "width" "100%" ]
         -- Table.table [css "table-layout" "fixed", css "width" "100%"]
@@ -205,9 +210,24 @@ viewConceptsSuccess model header rows =
             )
         ]
 
-viewConceptLanguageHeader : String -> String -> Html msg
-viewConceptLanguageHeader size name =
-    Table.th [css "text-align" "left", css "width" size][showText div Typo.body2 name]
+
+
+viewLanguageSelectMenu : Int -> Model -> String -> Html Msg
+viewLanguageSelectMenu index model language =
+    Menu.render Mdl [index] model.mdl
+      [ Menu.ripple, Menu.bottomLeft, Menu.icon "keyboard_arrow_down" ]
+      [ Menu.item
+          [ ] -- Menu.onSelect MySelectMsg0 ]
+          [ text "F#" ]
+      , Menu.item
+          [ ] -- Menu.onSelect MySelectMsg1 ]
+          [ text "Elm" ]
+      ]
+
+viewConceptLanguageHeader : Int -> Model -> String -> String -> Html Msg
+viewConceptLanguageHeader index model size name =
+    Table.th [css "text-align" "left", css "width" size][viewLanguageSelectMenu index model name, showText span Typo.body2 name]
+
 
 viewFullConcepts : Model -> Html Msg
 viewFullConcepts model =
