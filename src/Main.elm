@@ -35,33 +35,33 @@ type Msg
     = UrlChange Location
     | TimeChange Time
     | RouterMsg Router.Msg
-    | HandleUserInformationResponse (RemoteData.WebData UserInformation)
+    | HandleAvailableLanguagesResponse (RemoteData.WebData (List Language))
 
 init : Flags -> Location -> ( Model, Cmd Msg )
 init flags location =
     ( { appState = NotReady flags.currentTime
       , location = location
       }
-      , fetchUserInformation
+      , fetchAvailableLanguages
     )
 
-fetchUserInformation : Cmd Msg
-fetchUserInformation =
+fetchAvailableLanguages : Cmd Msg
+fetchAvailableLanguages =
     let
-      url = "userInformation.json"
+      url = "available-languages.json"
       req =  Http.request
         { method = "GET"
         , headers = []
         , url = url
         , body = Http.emptyBody
-        , expect = Http.expectJson Decoders.decodeUserInformation
+        , expect = Http.expectJson Decoders.decodeAvailableLanguages
         , timeout = Nothing
-        , withCredentials = True
+        , withCredentials = False
         }
     in
       req
       |> RemoteData.sendRequest
-      |> Cmd.map HandleUserInformationResponse
+      |> Cmd.map HandleAvailableLanguagesResponse
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -69,8 +69,8 @@ update msg model =
         TimeChange time ->
             updateTime model time
 
-        HandleUserInformationResponse webData ->
-            updateUserInfo model webData
+        HandleAvailableLanguagesResponse webData ->
+            updateAvailableLanguages model webData
 
         UrlChange location ->
             updateRouter { model | location = location } (Router.UrlChange location)
@@ -112,30 +112,30 @@ updateRouter model routerMsg =
             Debug.crash "Ooops. We got a sub-component message even though it wasn't supposed to be initialized?!?!?"
 
 
-updateUserInfo : Model -> RemoteData.WebData UserInformation -> ( Model, Cmd Msg )
-updateUserInfo model webData =
+updateAvailableLanguages : Model -> RemoteData.WebData (List Language) -> ( Model, Cmd Msg )
+updateAvailableLanguages model webData =
     case webData of
         Failure _ ->
             Debug.crash "OMG CANT EVEN DOWNLOAD."
 
-        Success userInfo ->
+        Success languages ->
             case model.appState of
                 NotReady time ->
                     let
                         initTaco =
                             { currentTime = time
-                            , userInfo = userInfo
+                            , availableLanguages = languages
                             }
 
                         ( initRouterModel, routerCmd ) =
-                            Router.init model.location
+                            Router.init model.location initTaco
                     in
                         ( { model | appState = Ready initTaco initRouterModel }
                         , Cmd.map RouterMsg routerCmd
                         )
 
                 Ready taco routerModel ->
-                    ( { model | appState = Ready (updateTaco taco (UpdateUserInfo userInfo)) routerModel }
+                    ( { model | appState = Ready (updateTaco taco (UpdateAvailableLanguages languages)) routerModel }
                     , Cmd.none
                     )
 
@@ -148,8 +148,8 @@ updateTaco taco tacoUpdate =
         UpdateTime time ->
             { taco | currentTime = time }
 
-        UpdateUserInfo userInfo ->
-            { taco | userInfo = Debug.log "user" userInfo }
+        UpdateAvailableLanguages languages ->
+            { taco | availableLanguages = Debug.log "languages" languages }
 
         NoUpdate ->
             taco

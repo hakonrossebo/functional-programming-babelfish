@@ -53,11 +53,11 @@ type Msg
     | BabelfishMsg Babelfish.Msg
 
 
-init : Location -> ( Model, Cmd Msg )
-init location =
+init : Location -> Taco -> ( Model, Cmd Msg )
+init location taco =
     let
         ( babelfishModel, babelfishCmd ) =
-            Babelfish.init
+            Babelfish.init taco
     in
         ( { mdl = Material.model
           , selectedTab = 0

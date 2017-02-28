@@ -3,7 +3,7 @@ import Time exposing (Time)
 
 type alias Taco =
     { currentTime : Time
-    , userInfo : UserInformation
+    , availableLanguages : List Language
     }
 
 
@@ -15,7 +15,7 @@ type Route
 type TacoUpdate
     = NoUpdate
     | UpdateTime Time
-    | UpdateUserInfo UserInformation
+    | UpdateAvailableLanguages (List Language)
 
 type SharedMsg
     = CreateSnackbarToast String
@@ -27,6 +27,10 @@ type alias UserInformation =
     , options : String
     }
 
+type alias Language =
+    { name: String
+    , languageCode: String
+    }
 
 type alias Concept =
     { name: String

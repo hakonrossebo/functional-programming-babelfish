@@ -41,12 +41,16 @@ type Msg
     | ConceptsResponse (WebData (List Concept))
 
 
-init : ( Model, Cmd Msg )
-init =
+init : Taco -> ( Model, Cmd Msg )
+init taco =
+    let
+        languages =
+            taco.availableLanguages
+            |> List.map (\language -> language.name)
+    in
     ( { mdl = Material.model
       , concepts = RemoteData.NotAsked
-      , displayLanguages = ["Purescript", "Haskell", "Elm", "F#"]
-      -- , displayLanguages = ["Purescript", "F#"]
+      , displayLanguages = languages
       , conceptLanguagesViewModel = NotCreated }
     , fetchData
     )
@@ -61,7 +65,7 @@ fetchData =
 
 fetchConcepts : Cmd Msg
 fetchConcepts =
-    Http.get "languages.json" decodeConcepts
+    Http.get "concepts.json" decodeConcepts
         |> RemoteData.sendRequest
         |> Cmd.map ConceptsResponse
 
@@ -75,7 +79,7 @@ update msg model =
             (model_, cmd_ ) =
               Material.update Mdl msg_ model
           in
-            (model_, cmd_, NoSharedMsg)
+              (model_, cmd_, NoSharedMsg)
 
         ConceptsResponse response ->
             ( { model | concepts = response, conceptLanguagesViewModel = createConceptLanguagesViewModel model response }, Cmd.none, NoSharedMsg)

@@ -10,7 +10,15 @@ decodeUserInformation =
         (field "username" Json.string)
         (field "options" Json.string)
 
+decodeAvailableLanguages : Json.Decoder (List Language)
+decodeAvailableLanguages =
+    Json.list decodeLanguage
 
+decodeLanguage : Json.Decoder Language
+decodeLanguage =
+    Json.map2 Language
+        (field "name" Json.string)
+        (field "languageCode" Json.string)
 
 decodeConcepts : Json.Decoder (List Concept)
 decodeConcepts =
