@@ -1,6 +1,7 @@
 module Pages.Babelfish.Babelfish exposing (..)
 
 import Html exposing (Html, text, div, span, p, a)
+import Html.Attributes exposing (href)
 import Material
 import Material.Grid as Grid exposing (grid, size, cell, Device(..))
 import Material.Elevation as Elevation
@@ -354,7 +355,7 @@ viewConceptLinks links =
             [ showText div Typo.caption "Links"
             , div []
                     (links
-                    |> List.map (\link -> text link.url)
+                    |> List.map (\link -> a [href link.url, Html.Attributes.target "_blank"][text link.url])
                     )
             ]
 
