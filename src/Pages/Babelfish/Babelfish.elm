@@ -288,7 +288,7 @@ viewFullConcept taco concept =
                 , a [href "#top"][text "Back to top"]
                 ]
             , cell
-                [ size All 6
+                [ size All 12
                 , Options.css "padding" "6px 4px"
                 , Options.css "display" "flex"
                 , Options.css "flex-direction" "column"
@@ -297,11 +297,11 @@ viewFullConcept taco concept =
                 [ viewConceptLanguageCodeTable concept.languageImplementations
                 ]
             , cell
-                [ size All 6
+                [ size All 12
                 -- , Elevation.e2
                 , Options.css "padding" "6px 4px"
                 , Options.css "display" "flex"
-                , Options.css "flex-direction" "column"
+                , Options.css "flex-direction" "row"
                 , Options.css "align-items" "stretch"
                 , Options.css "justify-content" "flex-start"
                 , Options.css "align-content" "stretch"
@@ -325,13 +325,13 @@ viewConceptNote note =
             case note of
               Just note_ ->
                 Options.div
-                [ Elevation.e4
+                [ Elevation.e2
                 , css "height" "196px"
-                , css "flex" "1 1 auto"
+                , css "flex" "1 0 auto"
                 , css "overflow" "auto"
                 , css "border-radius" "2px"
-                , css "width"  "528px"
-                -- , css "margin-top" "4rem"
+                , css "width"  "500px"
+                 , css "margin-right" "1rem"
                 , css "padding" "16px 16px 16px 16px"
                 ]
                 [ showText div Typo.caption "Notes"
@@ -342,13 +342,13 @@ viewConceptNote note =
 viewConceptLinks : List ConceptLink -> Html Msg
 viewConceptLinks links =
             Options.div
-            [ Elevation.e4
+            [ Elevation.e2
             , css "height" "196px"
-            , css "flex" "1 1 auto"
+            , css "flex" "1 0 auto"
             , css "overflow" "auto"
             , css "border-radius" "2px"
-            , css "width"  "528px"
-            -- , css "margin-top" "4rem"
+            , css "width"  "500px"
+            , css "margin-left" "1rem"
             , css "padding" "16px 16px 16px 16px"
             ]
             [ showText div Typo.caption "Links"
@@ -391,13 +391,13 @@ viewConceptLanguageCodeTableItem index language =
 viewConceptLanguageExamples : Taco -> List LanguageImplementation -> Html Msg
 viewConceptLanguageExamples taco languages =
             Options.div
-            [ --Elevation.e4
+            [ Elevation.e2
             -- , css "height" "196px"
-             css "flex" "1 1 auto"
+            , css "flex" "1 1 auto"
             , css "overflow" "auto"
             , css "border-radius" "2px"
-            -- , css "width"  "528px"
-            , css "margin-top" "2rem"
+            , css "width"  "97%"
+            , css "margin-top" "1rem"
             , css "padding" "16px 16px 16px 16px"
             ]
             [ showText div Typo.caption "Examples"
@@ -430,9 +430,9 @@ viewLanguageConceptExample availableLanguages language =
 viewLanguageConceptExampleContainer : String -> String -> String -> Html Msg
 viewLanguageConceptExampleContainer name hightlightCodeName insideHtml =
             Options.div
-            [ Elevation.e4
+            [ --Elevation.e2
             -- , css "height" "196px"
-            , css "flex" "1 1 auto"
+             css "flex" "1 1 auto"
             , css "overflow" "auto"
             , css "border-radius" "2px"
             -- , css "width"  "528px"
@@ -450,6 +450,7 @@ viewFormattedLanguageExample language options str =
         (Markdown.toHtmlWith Markdown.defaultOptions)
         (Options.many
             [ css "overflow" "auto"
+            , css "flex" "1 1 auto"
             -- , css "border-radius" "2px"
             -- , css "font-size" "10pt"
             -- , Color.background (Color.color Color.BlueGrey Color.S50)
