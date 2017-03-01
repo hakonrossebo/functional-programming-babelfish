@@ -1,0 +1,22 @@
+[
+        {
+            "name": "Purescript",
+            "languageCode": "haskell"
+        },
+        {
+            "name": "Haskell",
+            "languageCode": "haskell"
+        },
+        {
+            "name": "Elm",
+            "languageCode": "elm"
+        },
+        {
+            "name": "F#",
+            "languageCode": "fsharp"
+        },
+        {
+            "name": "Empty",
+            "languageCode": "emptyslot"
+        }
+]
