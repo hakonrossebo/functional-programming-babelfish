@@ -42,7 +42,7 @@ type alias Concept =
   }
 
 type alias LanguageImplementation =
-    { language : String
+    { name : String
     , code : String
     , example : Maybe String
   }
