@@ -33,7 +33,7 @@ viewConceptLanguageDescription : Int -> String -> Html msg
 viewConceptLanguageDescription idx descriptionText =
     let
       content =
-        if idx == 99 then
+        if idx == 0 then
           [a [href <| "#" ++ createConceptNameId descriptionText] [text descriptionText]]
         else
           [text descriptionText]
