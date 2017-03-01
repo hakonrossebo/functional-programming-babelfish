@@ -7,6 +7,7 @@ import Html.Attributes exposing (href)
 import Types exposing (Route(..), TacoUpdate(..), Taco, SharedMsg(..))
 import Routing.Helpers exposing (parseLocation, reverseRoute, fromTabToRoute)
 import Pages.Babelfish.Babelfish as Babelfish
+import Pages.About.About as About
 import Material
 import Material.Layout as Layout
 import Material.Snackbar as Snackbar
@@ -298,7 +299,7 @@ pageView taco model =
                 |> Html.map BabelfishMsg
 
         RouteAbout ->
-            h1 [] [ text "About" ]
+            About.view taco
 
         NotFoundRoute ->
             h1 [] [ text "404 :(" ]
@@ -327,5 +328,3 @@ helpDialog model =
                 ]
             ]
         ]
-
-
