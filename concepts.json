@@ -3,7 +3,7 @@
 			"name": "Forward function application",
 			"description": "Apply / Pipe",
 			"index": 0,
-			"notes": "A simple note on function application",
+			"notes": "Applies an argument to a function. The Apply/Pipe-forward operator lets you pass an intermediate result onto the next function.",
 			"languages": [
 				{
 					"name": "Purescript",
@@ -25,8 +25,16 @@
 			],
 			"links": [
 				{
+					"url": "https://pursuit.purescript.org/packages/purescript-prelude/2.1.0/docs/Prelude#v:(#)",
+					"description": "Purescript # reference"
+				},
+				{
 					"url": "http://stackoverflow.com/questions/1457140/haskell-composition-vs-fs-pipe-forward-operator",
 					"description": "Stack Overflow discussion"
+				},
+				{
+					"url": "http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics",
+					"description": "Elm core documentation"
 				}
 			]
 		},
