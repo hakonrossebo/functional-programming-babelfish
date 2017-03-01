@@ -16,11 +16,11 @@
 				{
 					"name": "Elm",
 					"code": "|>",
-					"example": "(|>) : a -> (a -> b) -> b\nresult = \n100\n  |> function1\n  |> function2\n202"
+					"example": "(|>) : a -> (a -> b) -> b\nresult = \n100\n  |>  add1\n  |>  times2\n202"
 				},				{
 					"name": "F#",
 					"code": "|>",
-					"example": "( |> ) : 'T1 -> ('T1 -> 'U) -> 'U let result = 100 |> function1 |> function2 202"
+					"example": "( |> ) : 'T1 -> ('T1 -> 'U) -> 'U \nlet result = \n100\n  |>  add1\n  |>  times2\n202"
 				}
 			],
 			"links": [
@@ -34,27 +34,33 @@
 			"name": "Backward function application",
 			"description": "Apply / Pipe",
 			"index": 1,
+			"notes": "Applies a function to an argument. Can be used to avoid parentheses and improve readability.",
 			"languages": [
 				{
 					"name": "Purescript",
 					"code": "$, apply",
-					"example": "apply :: forall a b. (a -> b) -> a -> b apply f x = f x street (address (boss employee)) street $ address $ boss employee"
+					"example": "apply :: forall a b. (a -> b) -> a -> b\napply f x = f x\n\n= street (address (boss employee))\n= street $ address $ boss employee"
 				},
 				{
 					"name": "Haskell",
 					"code": "$",
-					"example": "($) :: (a -> b) -> a -> b F x = f x"
+					"example": "($) :: (a -> b) -> a -> b\nF x = f x\n\n= street (address (boss employee))\n= street $ address $ boss employee"
 				},
 				{
 					"name": "Elm",
-					"code": "<|"
+					"code": "<|",
+					"example": "(a -> b) -> a -> b\n\nstreet (address (boss employee)) \nstreet <| address <| boss employee"
 				},				{
 					"name": "F#",
 					"code": "<|",
-					"example": "( <| ) : ('T -> 'U) -> 'T -> 'U (backward pipe operator) street (address (boss employee)) street <| address <| boss employee"
+					"example": "( <| ) : ('T -> 'U) -> 'T -> 'U\n(backward pipe operator)\nstreet (address (boss employee)) \nstreet <| address <| boss employee"
 				}
 			],
 			"links": [
+				{
+					"url": "https://pursuit.purescript.org/packages/purescript-prelude/2.1.0/docs/Prelude#v:($)",
+					"description": "Purescript $ reference"
+				},
 				{
 					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/functions/index",
 					"description": "F# functions reference"
