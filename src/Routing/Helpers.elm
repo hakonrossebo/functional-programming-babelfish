@@ -9,13 +9,13 @@ reverseRoute : Route -> String
 reverseRoute route =
     case route of
         RouteAbout ->
-            "/about"
+            "/#about"
 
         RouteBabelfish ->
-            "/"
+            "#/"
 
         _ ->
-            "/"
+            "#/"
 
 
 routeParser : Url.Parser (Route -> a) a
@@ -23,14 +23,14 @@ routeParser =
   Url.oneOf
     [ Url.map RouteBabelfish Url.top
     , Url.map RouteAbout (Url.s "about")
-    , Url.map RouteBabelfish (Url.s "/")
+    , Url.map RouteBabelfish (Url.s "#/")
     ]
 
 
 parseLocation : Location -> Route
 parseLocation location =
     location
-        |> Url.parsePath routeParser
+        |> Url.parseHash routeParser
         |> Maybe.withDefault NotFoundRoute
 
 fromTabToRoute : Int -> Route
