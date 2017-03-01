@@ -285,7 +285,7 @@ viewFullConcept taco concept =
                 , Options.css "align-items" "left"
                 ]
                 [ showText div Typo.headline concept.name
-                , a [href "#top"][text "Back to top"]
+                -- , a [href "#top"][text "Back to top"]
                 ]
             , cell
                 [ size All 12
