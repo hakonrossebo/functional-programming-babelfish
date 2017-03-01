@@ -18,8 +18,10 @@ import Decoders exposing (..)
 import Http exposing (Error)
 import Dropdown
 import Pages.Babelfish.ConceptDetail as ConceptDetail
+import Pages.Babelfish.Helpers exposing (..)
 import Dict
 import Markdown
+import Regex
 
 styles : String
 styles =
@@ -139,35 +141,31 @@ findLanguageImplementation lang languageImplementations =
 
 view : Taco -> Model -> Html Msg
 view taco model =
-    let
-        pieClass =
-            "abc123"
-    in
-        grid [ Options.css "max-width" "1280px" ]
-            [ cell
-                [ size All 12
-                , Elevation.e2
-                , Options.css "padding" "6px 4px"
-                , Options.css "display" "flex"
-                , Options.css "flex-direction" "column"
-                , Options.css "align-items" "left"
-                ]
-                [ showText div Typo.body1 "This is an attempt to provide a link and comparision between similar concepts and operations and their usage between different functional programming languages . When learning and working with different languages and concepts, it's nice to have an easy way of looking up the implementations. Please contribute! I am not an expert in these languages. Please contribute to improvements with PR's and issues to help improve this reference."
-                , showText div Typo.body1 "The table is limited to showng 4 languages simultaneously. When there are more languages available, you can choose other languages in the table header menus."
-                , viewConcepts taco model
-                ]
-            , cell
-                [ size All 12
-                , Elevation.e2
-                , Options.css "padding" "6px 4px"
-                , Options.css "display" "flex"
-                , Options.css "flex-direction" "column"
-                , Options.css "align-items" "left"
-                ]
-                [ showText div Typo.display1 "Concept details"
-                , viewFullConcepts taco model
-                ]
-            ]
+      grid [ Options.id "top", Options.css "max-width" "1280px" ]
+          [ cell
+              [ size All 12
+              , Elevation.e2
+              , Options.css "padding" "6px 4px"
+              , Options.css "display" "flex"
+              , Options.css "flex-direction" "column"
+              , Options.css "align-items" "left"
+              ]
+              [ showText div Typo.body1 "This is an attempt to provide a link and comparision between similar concepts and operations and their usage between different functional programming languages . When learning and working with different languages and concepts, it's nice to have an easy way of looking up the implementations. Please contribute! I am not an expert in these languages. Please contribute to improvements with PR's and issues to help improve this reference."
+              , showText div Typo.body1 "The table is limited to showng 4 languages simultaneously. When there are more languages available, you can choose other languages in the table header menus."
+              , viewConcepts taco model
+              ]
+          , cell
+              [ size All 12
+              , Elevation.e2
+              , Options.css "padding" "6px 4px"
+              , Options.css "display" "flex"
+              , Options.css "flex-direction" "column"
+              , Options.css "align-items" "left"
+              ]
+              [ showText div Typo.display1 "Concept details"
+              , viewFullConcepts taco model
+              ]
+          ]
 
 
 
@@ -278,7 +276,7 @@ viewFullConceptSuccess taco model data =
 
 viewFullConcept : Taco -> Concept -> Html Msg
 viewFullConcept taco concept =
-        grid [ Options.css "max-width" "1280px" ]
+        grid [Options.id <| createConceptNameId concept.name, Options.css "max-width" "1280px" ]
             [ cell
                 [ size All 12
                 , Options.css "padding" "6px 4px"
@@ -287,6 +285,7 @@ viewFullConcept taco concept =
                 , Options.css "align-items" "left"
                 ]
                 [ showText div Typo.headline concept.name
+                , a [href "#top"][text "Back to top"]
                 ]
             , cell
                 [ size All 6

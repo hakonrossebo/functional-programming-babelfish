@@ -1,6 +1,7 @@
 
 module Pages.Babelfish.ConceptDetail exposing (..)
 import Html exposing (Html, text, div, span, p, a)
+import Html.Attributes exposing (href)
 import Material
 import Json.Decode as Json exposing (field)
 import Json.Encode
@@ -13,6 +14,7 @@ import Material.Tooltip as Tooltip
 import Http exposing (Error)
 import Types exposing (Concept, LanguageImplementation, RowLanguageImplementations)
 import Dict
+import Pages.Babelfish.Helpers exposing (..)
 
 viewConceptItem : Int -> (RowLanguageImplementations, RowLanguageImplementations) -> Material.Model -> Html msg
 viewConceptItem idx (descRow, codeRow) outerMdl =
@@ -22,14 +24,21 @@ viewConceptItem idx (descRow, codeRow) outerMdl =
            |> List.map (\row -> viewConceptLanguage row)
          desc =
            descRow
-           |> List.map (\row -> viewConceptLanguageDescription row)
+           |> List.indexedMap (\idx row -> viewConceptLanguageDescription idx row)
        in
           List.append desc code
           |> Table.tr []
 
-viewConceptLanguageDescription : String -> Html msg
-viewConceptLanguageDescription code =
-    Table.td [css "text-align" "left", css "background-color" "#f6f6f6", cs "wrapword"][text code]
+viewConceptLanguageDescription : Int -> String -> Html msg
+viewConceptLanguageDescription idx descriptionText =
+    let
+      content =
+        if idx == 0 then
+          [a [href <| "#" ++ createConceptNameId descriptionText] [text descriptionText]]
+        else
+          [text descriptionText]
+    in
+    Table.td [css "text-align" "left", css "background-color" "#f6f6f6", cs "wrapword"] (content)
 
 viewConceptLanguage : String -> Html msg
 viewConceptLanguage code =
