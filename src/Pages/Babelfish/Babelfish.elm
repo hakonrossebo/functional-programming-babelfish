@@ -131,7 +131,7 @@ createConceptLanguagesViewModelRow displayLanguages languageImplementations name
 findLanguageImplementation : String -> List LanguageImplementation -> String
 findLanguageImplementation lang languageImplementations =
     languageImplementations
-    |> List.filter (\x -> x.language == lang)
+    |> List.filter (\x -> x.name == lang)
     |> List.map (\x -> x.code)
     |> List.head
     |> Maybe.withDefault ""
@@ -165,7 +165,7 @@ view taco model =
                 , Options.css "align-items" "left"
                 ]
                 [ showText div Typo.display1 "Concept details"
-                , viewFullConcepts model
+                , viewFullConcepts taco model
                 ]
             ]
 
@@ -253,8 +253,8 @@ viewMenuItem currentLanguage newLanguage =
             [ text newLanguage ]
 
 
-viewFullConcepts : Model -> Html Msg
-viewFullConcepts model =
+viewFullConcepts : Taco -> Model -> Html Msg
+viewFullConcepts taco model =
     case model.concepts of
         NotAsked ->
             text "Initialising."
@@ -266,18 +266,18 @@ viewFullConcepts model =
             text ("Error: " ++ toString err)
 
         Success data ->
-            viewFullConceptSuccess model data
+            viewFullConceptSuccess taco model data
 
 
-viewFullConceptSuccess : Model -> List Concept -> Html Msg
-viewFullConceptSuccess model data =
+viewFullConceptSuccess : Taco -> Model -> List Concept -> Html Msg
+viewFullConceptSuccess taco model data =
     data
-    |> List.map (\item -> viewFullConcept item)
+    |> List.map (\item -> viewFullConcept taco item)
     |> div []
 
 
-viewFullConcept : Concept -> Html Msg
-viewFullConcept concept =
+viewFullConcept : Taco -> Concept -> Html Msg
+viewFullConcept taco concept =
         grid [ Options.css "max-width" "1280px" ]
             [ cell
                 [ size All 12
@@ -317,7 +317,7 @@ viewFullConcept concept =
                 , Options.css "flex-direction" "column"
                 , Options.css "align-items" "left"
                 ]
-                [ viewConceptLanguageExamples concept.languageImplementations
+                [ viewConceptLanguageExamples taco concept.languageImplementations
                 ]
             ]
 
@@ -355,7 +355,7 @@ viewConceptLinks links =
             [ showText div Typo.caption "Links"
             , div []
                     (links
-                    |> List.map (\link -> a [href link.url, Html.Attributes.target "_blank"][text link.url])
+                    |> List.map (\link -> div [][a [href link.url, Html.Attributes.target "_blank"][text link.description]])
                     )
             ]
 
@@ -384,13 +384,13 @@ viewConceptLanguageCodeTableItem : Int -> LanguageImplementation -> Html Msg
 viewConceptLanguageCodeTableItem index language =
     Table.tr
         []
-        [ Table.td [ css "text-align" "left" ] [ text language.language]
+        [ Table.td [ css "text-align" "left" ] [ text language.name]
         , Table.td [ css "text-align" "left" ] [ text language.code ]
         ]
 
 
-viewConceptLanguageExamples : List LanguageImplementation -> Html Msg
-viewConceptLanguageExamples languages =
+viewConceptLanguageExamples : Taco -> List LanguageImplementation -> Html Msg
+viewConceptLanguageExamples taco languages =
             Options.div
             [ --Elevation.e4
             -- , css "height" "196px"
@@ -404,24 +404,32 @@ viewConceptLanguageExamples languages =
             [ showText div Typo.caption "Examples"
             , div []
                 (languages
-                |> List.map (\language -> viewLanguageConceptExample language)
+                |> List.map (\language -> viewLanguageConceptExample taco.availableLanguages language)
                 )
             ]
     -- languages
     -- |> List.map (\language -> viewLanguageConceptExample language)
 
 
-viewLanguageConceptExample : LanguageImplementation -> Html Msg
-viewLanguageConceptExample language =
+viewLanguageConceptExample : List Language -> LanguageImplementation -> Html Msg
+viewLanguageConceptExample availableLanguages language =
     case language.example of
         Just example ->
-          viewLanguageExampleWrapper language.language example
+          let
+            languageHighlightCodeName =
+              availableLanguages
+              |> List.filter (\lang -> lang.name == language.name)
+              |> List.map (\lang -> lang.languageCode)
+              |> List.head
+              |> Maybe.withDefault "haskell"
+          in
+            viewLanguageConceptExampleContainer language.name languageHighlightCodeName example
         Nothing ->
           text ""
 
 
-viewLanguageExampleWrapper : String -> String -> Html Msg
-viewLanguageExampleWrapper name insideHtml =
+viewLanguageConceptExampleContainer : String -> String -> String -> Html Msg
+viewLanguageConceptExampleContainer name hightlightCodeName insideHtml =
             Options.div
             [ Elevation.e4
             -- , css "height" "196px"
@@ -434,11 +442,11 @@ viewLanguageExampleWrapper name insideHtml =
             ]
             [ showText div Typo.caption name
             -- , showText div Typo.body1 insideHtml
-            , format "elm" [] insideHtml
+            , viewFormattedLanguageExample hightlightCodeName [] insideHtml
             ]
 
-format : String -> List (Options.Property c m) -> String -> Html m
-format language options str =
+viewFormattedLanguageExample : String -> List (Options.Property c m) -> String -> Html m
+viewFormattedLanguageExample language options str =
     Options.styled
         (Markdown.toHtmlWith Markdown.defaultOptions)
         (Options.many
