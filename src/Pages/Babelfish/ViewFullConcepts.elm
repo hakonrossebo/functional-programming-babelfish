@@ -11,7 +11,7 @@ import Material.Icon as Icon
 import Material.Tooltip as Tooltip
 import Material.Typography as Typo
 import Material.Grid as Grid exposing (grid, size, cell, Device(..))
-import Types exposing (Concept, LanguageImplementation, RowLanguageImplementations, Taco, ConceptLink, Language)
+import Types exposing (Concept, LanguageImplementation, Taco, ConceptLink, Language)
 import Markdown
 import Pages.Babelfish.Helpers exposing (..)
 import Pages.Babelfish.Messages exposing (..)

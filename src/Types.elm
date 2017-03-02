@@ -26,13 +26,6 @@ type SharedMsg
     | NoSharedMsg
 
 
-type alias UserInformation =
-    { name : String
-    , username : String
-    , options : String
-    }
-
-
 type alias Language =
     { name : String
     , languageCode : String
@@ -60,12 +53,3 @@ type alias ConceptLink =
     { url : String
     , description : String
     }
-
-
-type alias RowLanguageImplementations =
-    List String
-
-
-type ConceptLanguagesViewModel
-    = NotCreated
-    | Created RowLanguageImplementations (List ( RowLanguageImplementations, RowLanguageImplementations ))

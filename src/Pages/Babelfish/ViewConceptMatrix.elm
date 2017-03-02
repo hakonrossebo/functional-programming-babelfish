@@ -5,14 +5,61 @@ import Material
 import Material.Menu as Menu
 import Material.Button as Button
 import Material.Options as Options exposing (when, css, cs, Style, onClick)
+import RemoteData exposing (WebData, RemoteData(..))
 import Material.Table as Table
 import Material.Icon as Icon
 import Material.Tooltip as Tooltip
 import Material.Typography as Typo
-import Types exposing (Concept, LanguageImplementation, RowLanguageImplementations, Taco)
+import Types exposing (Concept, LanguageImplementation, Taco)
 import Pages.Babelfish.Helpers exposing (..)
 import Pages.Babelfish.Messages exposing (..)
 import Pages.Babelfish.Helpers exposing (..)
+
+type alias RowLanguageImplementations =
+    List String
+
+
+type ConceptLanguagesViewModel
+    = NotCreated
+    | Created RowLanguageImplementations (List ( RowLanguageImplementations, RowLanguageImplementations ))
+
+createConceptLanguagesViewModel : List String -> WebData (List Concept) -> ConceptLanguagesViewModel
+createConceptLanguagesViewModel displayLanguages concepts =
+    case concepts of
+        Success data ->
+            let
+                header =
+                    displayLanguages
+
+                rows =
+                    data
+                        |> List.map (\concept -> createConceptLanguagesViewModelRow displayLanguages concept.languageImplementations concept.name concept.description)
+            in
+                Created header rows
+
+        _ ->
+            NotCreated
+
+
+createConceptLanguagesViewModelRow : List String -> List LanguageImplementation -> String -> String -> ( RowLanguageImplementations, RowLanguageImplementations )
+createConceptLanguagesViewModelRow displayLanguages languageImplementations name desc =
+    let
+        languages =
+            displayLanguages
+                |> List.map (\lang -> findLanguageImplementation lang languageImplementations)
+    in
+        ( [ name, desc ], languages )
+
+
+findLanguageImplementation : String -> List LanguageImplementation -> String
+findLanguageImplementation lang languageImplementations =
+    languageImplementations
+        |> List.filter (\x -> x.name == lang)
+        |> List.map (\x -> x.code)
+        |> List.head
+        |> Maybe.withDefault ""
+
+
 
 viewConceptsMatrixSuccess : Taco -> List String -> Material.Model -> RowLanguageImplementations -> List ( RowLanguageImplementations, RowLanguageImplementations ) -> Html Msg
 viewConceptsMatrixSuccess taco displayLanguages outerMdl header rows =

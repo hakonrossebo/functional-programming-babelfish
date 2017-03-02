@@ -13,19 +13,10 @@ import Types exposing (..)
 import Decoders exposing (..)
 import Http exposing (Error)
 import Pages.Babelfish.Messages exposing (..)
-import Pages.Babelfish.ViewConceptMatrix as ViewConceptMatrix
+import Pages.Babelfish.ViewConceptMatrix as ViewConceptMatrix exposing (ConceptLanguagesViewModel(..))
 import Pages.Babelfish.ViewFullConcepts as ViewFullConcepts
 import Pages.Babelfish.Helpers exposing (..)
 import CustomPorts exposing (..)
-
-styles : String
-styles =
-    """\x0D\x0D\x0D\x0D
-   .mdl-layout__drawer {\x0D\x0D\x0D\x0D
-      border: none !important;\x0D\x0D\x0D\x0D
-   }\x0D\x0D\x0D\x0D
-   """
-
 
 type alias Model =
     { mdl : Material.Model
@@ -33,9 +24,6 @@ type alias Model =
     , displayLanguages : List String
     , conceptLanguagesViewModel : ConceptLanguagesViewModel
     }
-
-
-
 
 subs : Model -> Sub Msg
 subs model =
@@ -86,7 +74,7 @@ update msg model =
             ( model, scrollIdIntoView id, NoSharedMsg )
 
         ConceptsResponse response ->
-            ( { model | concepts = response, conceptLanguagesViewModel = createConceptLanguagesViewModel model.displayLanguages response }, Cmd.none, NoSharedMsg )
+            ( { model | concepts = response, conceptLanguagesViewModel = ViewConceptMatrix.createConceptLanguagesViewModel model.displayLanguages response }, Cmd.none, NoSharedMsg )
 
         SelectLanguage currentLanguage language ->
             let
@@ -94,7 +82,7 @@ update msg model =
                     updateDisplayLanguages currentLanguage language model.displayLanguages
 
                 conceptLanguagesViewModel =
-                    createConceptLanguagesViewModel displayLanguages model.concepts
+                    ViewConceptMatrix.createConceptLanguagesViewModel displayLanguages model.concepts
             in
                 ( { model | displayLanguages = displayLanguages, conceptLanguagesViewModel = conceptLanguagesViewModel }, Cmd.none, NoSharedMsg )
 
@@ -110,42 +98,6 @@ updateDisplayLanguages currentLanguage newLanguage displayLanguages =
                     language
             )
 
-
-createConceptLanguagesViewModel : List String -> WebData (List Concept) -> ConceptLanguagesViewModel
-createConceptLanguagesViewModel displayLanguages concepts =
-    case concepts of
-        Success data ->
-            let
-                header =
-                    displayLanguages
-
-                rows =
-                    data
-                        |> List.map (\concept -> createConceptLanguagesViewModelRow displayLanguages concept.languageImplementations concept.name concept.description)
-            in
-                Created header rows
-
-        _ ->
-            NotCreated
-
-
-createConceptLanguagesViewModelRow : List String -> List LanguageImplementation -> String -> String -> ( RowLanguageImplementations, RowLanguageImplementations )
-createConceptLanguagesViewModelRow displayLanguages languageImplementations name desc =
-    let
-        languages =
-            displayLanguages
-                |> List.map (\lang -> findLanguageImplementation lang languageImplementations)
-    in
-        ( [ name, desc ], languages )
-
-
-findLanguageImplementation : String -> List LanguageImplementation -> String
-findLanguageImplementation lang languageImplementations =
-    languageImplementations
-        |> List.filter (\x -> x.name == lang)
-        |> List.map (\x -> x.code)
-        |> List.head
-        |> Maybe.withDefault ""
 
 
 view : Taco -> Model -> Html Msg

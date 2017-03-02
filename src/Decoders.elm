@@ -4,14 +4,6 @@ import Types exposing (..)
 import Json.Decode as Json exposing (field)
 
 
-decodeUserInformation : Json.Decoder UserInformation
-decodeUserInformation =
-    Json.map3 UserInformation
-        (field "name" Json.string)
-        (field "username" Json.string)
-        (field "options" Json.string)
-
-
 decodeAvailableLanguages : Json.Decoder (List Language)
 decodeAvailableLanguages =
     Json.list decodeLanguage
