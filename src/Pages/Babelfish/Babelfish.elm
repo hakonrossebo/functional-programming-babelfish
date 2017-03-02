@@ -17,11 +17,11 @@ import RemoteData exposing (WebData, RemoteData(..))
 import Types exposing (..)
 import Decoders exposing (..)
 import Http exposing (Error)
-import Pages.Babelfish.ConceptDetail as ConceptDetail
+import Pages.Babelfish.Messages exposing (..)
+import Pages.Babelfish.ViewConceptMatrix as ViewConceptMatrix
 import Pages.Babelfish.Helpers exposing (..)
 import CustomPorts exposing (..)
 import Markdown
-
 
 styles : String
 styles =
@@ -40,11 +40,6 @@ type alias Model =
     }
 
 
-type Msg
-    = Mdl (Material.Msg Msg)
-    | ConceptsResponse (WebData (List Concept))
-    | SelectLanguage String String
-    | ScrollToDomId String
 
 
 subs : Model -> Sub Msg
@@ -171,7 +166,7 @@ view taco model =
             ]
             [ showText div Typo.body1 "This is an attempt to provide a link and comparision between similar concepts and operations and their usage between different functional programming languages . When learning and working with different languages and concepts, it's nice to have an easy way of looking up the implementations. Please contribute! I am not an expert in these languages. Please contribute to improvements with PR's and issues to help improve this reference."
             , showText div Typo.body1 "The table is limited to showng 4 languages simultaneously. When there are more languages available, you can choose other languages in the table header menus."
-            , viewConcepts taco model
+            , viewConceptsMatrix taco model
             ]
         , cell
             [ size All 12
@@ -197,96 +192,15 @@ white =
     Color.text Color.white
 
 
-viewConcepts : Taco -> Model -> Html Msg
-viewConcepts taco model =
+viewConceptsMatrix : Taco -> Model -> Html Msg
+viewConceptsMatrix taco model =
     case model.conceptLanguagesViewModel of
         NotCreated ->
             text "Initialising."
 
         Created header rows ->
-            viewConceptsSuccess taco model header rows
+            ViewConceptMatrix.viewConceptsMatrixSuccess taco model.displayLanguages model.mdl header rows
 
-
-viewConceptsSuccess : Taco -> Model -> RowLanguageImplementations -> List ( RowLanguageImplementations, RowLanguageImplementations ) -> Html Msg
-viewConceptsSuccess taco model header rows =
-    let
-        descriptions =
-            [ Table.th
-                [ css "width" "30%"
-                , css "vertical-align" "middle"
-                ]
-                [ showText div Typo.body2 "Concept"
-                ]
-            , Table.th
-                [ css "width" "10%"
-                , css "vertical-align" "middle"
-                ]
-                [ showText div Typo.body2 "Name"
-                ]
-            ]
-
-        availableWidth =
-            60
-
-        languageColumnSize =
-            model.displayLanguages
-                |> List.length
-                |> (//) availableWidth
-                |> toString
-
-        languageNames =
-            model.displayLanguages
-                |> List.indexedMap (\idx lang -> viewConceptLanguageHeader idx taco model languageColumnSize lang)
-    in
-        Table.table [ css "table-layout" "fixed", css "width" "100%" ]
-            -- Table.table [css "table-layout" "fixed", css "width" "100%"]
-            [ Table.thead
-                []
-                [ Table.tr [] (List.append descriptions languageNames)
-                ]
-            , Table.tbody []
-                (rows
-                    |> List.indexedMap (\idx item -> ConceptDetail.viewConceptItem idx item model.mdl Mdl ScrollToDomId)
-                )
-            ]
-
-
-viewConceptLanguageHeader : Int -> Taco -> Model -> String -> String -> Html Msg
-viewConceptLanguageHeader index taco model size name =
-    Table.th
-        [ css "text-align" "left"
-        , css "align-items" "center"
-        ]
-        [ Options.styled span [ Typo.body2, Typo.left, Typo.justify ] [ text name ]
-        , viewLanguageSelectMenu index taco model name
-        ]
-
-
-viewLanguageSelectMenu : Int -> Taco -> Model -> String -> Html Msg
-viewLanguageSelectMenu index taco model language =
-    Menu.render Mdl
-        [ index ]
-        model.mdl
-        [ css "float" "right"
-        , Menu.ripple
-        , Menu.bottomLeft
-        , Menu.icon "keyboard_arrow_down"
-        ]
-        (getMenuItems language taco model)
-
-
-getMenuItems : String -> Taco -> Model -> List (Menu.Item Msg)
-getMenuItems currentLanguage taco model =
-    taco.availableLanguages
-        |> List.filter (\availableLanguage -> not (List.any (\language -> language == availableLanguage.name) model.displayLanguages))
-        |> List.map (\language -> viewMenuItem currentLanguage language.name)
-
-
-viewMenuItem : String -> String -> Menu.Item Msg
-viewMenuItem currentLanguage newLanguage =
-    Menu.item
-        [ Menu.onSelect (SelectLanguage currentLanguage newLanguage) ]
-        [ text newLanguage ]
 
 
 viewFullConcepts : Taco -> Model -> Html Msg

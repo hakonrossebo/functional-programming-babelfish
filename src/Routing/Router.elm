@@ -6,6 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (href)
 import Types exposing (Route(..), TacoUpdate(..), Taco, SharedMsg(..))
 import Routing.Helpers exposing (parseLocation, reverseRoute, fromTabToRoute)
+import Pages.Babelfish.Messages as BabelfishMessages
 import Pages.Babelfish.Babelfish as Babelfish
 import Pages.About.About as About
 import Material
@@ -51,7 +52,7 @@ type Msg
     | UrlChange Location
     | SelectTab Int
     | NavigateTo Route
-    | BabelfishMsg Babelfish.Msg
+    | BabelfishMsg BabelfishMessages.Msg
 
 
 subs : Model -> Sub Msg
@@ -132,7 +133,7 @@ calculateNavigateUrlMessage tabIndex =
         |> Navigation.newUrl
 
 
-updateBabelfish : Model -> Babelfish.Msg -> ( Model, Cmd Msg, TacoUpdate )
+updateBabelfish : Model -> BabelfishMessages.Msg -> ( Model, Cmd Msg, TacoUpdate )
 updateBabelfish model babelfishMsg =
     let
         ( nextBabelfishModel, babelfishCmd, sharedMsg ) =
