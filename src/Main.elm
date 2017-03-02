@@ -10,6 +10,8 @@ import Http
 import Decoders
 import Material.Menu as Menu
 import Material
+import Material.Progress as Loading
+import Material.Options as Options exposing (when, css, cs, Style, onClick)
 
 main : Program Flags Model Msg
 main =
@@ -186,4 +188,9 @@ view model =
                 |> Html.map RouterMsg
 
         NotReady _ ->
-            text "Loading"
+          Options.div [ css "display" "flex"
+                      , css "width" "100%"
+                      , css "height" "100vh"
+                      , css "align-items" "center"
+                      , css "justify-content" "center"
+                      ][Loading.indeterminate]
