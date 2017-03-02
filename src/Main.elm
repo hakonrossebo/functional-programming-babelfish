@@ -13,6 +13,7 @@ import Material
 import Material.Progress as Loading
 import Material.Options as Options exposing (when, css, cs, Style, onClick)
 
+
 main : Program Flags Model Msg
 main =
     Navigation.programWithFlags UrlChange
@@ -22,20 +23,24 @@ main =
         , subscriptions = subscriptions
         }
 
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
     let
-      childSubscriptions =
-          case model.appState of
-              Ready taco routerModel ->
-                  Sub.map RouterMsg (Router.subs routerModel)
-              NotReady _ ->
-                  Sub.none
+        childSubscriptions =
+            case model.appState of
+                Ready taco routerModel ->
+                    Sub.map RouterMsg (Router.subs routerModel)
+
+                NotReady _ ->
+                    Sub.none
     in
-      Sub.batch [ Time.every Time.minute TimeChange
-                , childSubscriptions
-                , Material.subscriptions Mdl model
-                ]
+        Sub.batch
+            [ Time.every Time.minute TimeChange
+            , childSubscriptions
+            , Material.subscriptions Mdl model
+            ]
+
 
 type alias Model =
     { mdl : Material.Model
@@ -43,9 +48,11 @@ type alias Model =
     , location : Location
     }
 
+
 type AppState
     = NotReady Time
     | Ready Taco Router.Model
+
 
 type alias Flags =
     { currentTime : Time
@@ -59,32 +66,38 @@ type Msg
     | RouterMsg Router.Msg
     | HandleAvailableLanguagesResponse (RemoteData.WebData (List Language))
 
+
 init : Flags -> Location -> ( Model, Cmd Msg )
 init flags location =
     ( { mdl = Material.model
       , appState = NotReady flags.currentTime
       , location = location
       }
-      , fetchAvailableLanguages
+    , fetchAvailableLanguages
     )
+
 
 fetchAvailableLanguages : Cmd Msg
 fetchAvailableLanguages =
     let
-      url = "available-languages.json"
-      req =  Http.request
-        { method = "GET"
-        , headers = []
-        , url = url
-        , body = Http.emptyBody
-        , expect = Http.expectJson Decoders.decodeAvailableLanguages
-        , timeout = Nothing
-        , withCredentials = False
-        }
+        url =
+            "available-languages.json"
+
+        req =
+            Http.request
+                { method = "GET"
+                , headers = []
+                , url = url
+                , body = Http.emptyBody
+                , expect = Http.expectJson Decoders.decodeAvailableLanguages
+                , timeout = Nothing
+                , withCredentials = False
+                }
     in
-      req
-      |> RemoteData.sendRequest
-      |> Cmd.map HandleAvailableLanguagesResponse
+        req
+            |> RemoteData.sendRequest
+            |> Cmd.map HandleAvailableLanguagesResponse
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -168,6 +181,7 @@ updateAvailableLanguages model webData =
         _ ->
             ( model, Cmd.none )
 
+
 updateTaco : Taco -> TacoUpdate -> Taco
 updateTaco taco tacoUpdate =
     case tacoUpdate of
@@ -180,6 +194,7 @@ updateTaco taco tacoUpdate =
         NoUpdate ->
             taco
 
+
 view : Model -> Html Msg
 view model =
     case model.appState of
@@ -188,9 +203,11 @@ view model =
                 |> Html.map RouterMsg
 
         NotReady _ ->
-          Options.div [ css "display" "flex"
-                      , css "width" "100%"
-                      , css "height" "100vh"
-                      , css "align-items" "center"
-                      , css "justify-content" "center"
-                      ][Loading.indeterminate]
+            Options.div
+                [ css "display" "flex"
+                , css "width" "100%"
+                , css "height" "100vh"
+                , css "align-items" "center"
+                , css "justify-content" "center"
+                ]
+                [ Loading.indeterminate ]

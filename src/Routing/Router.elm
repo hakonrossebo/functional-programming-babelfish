@@ -20,19 +20,19 @@ import Material.Options as Options exposing (css, cs, when)
 
 styles : String
 styles =
-    """\x0D
-   .demo-options .mdl-checkbox__box-outline {\x0D
-      border-color: rgba(255, 255, 255, 0.89);\x0D
-    }\x0D
-\x0D
-   .mdl-layout__drawer {\x0D
-      border: none !important;\x0D
-   }\x0D
-\x0D
-   .mdl-layout__drawer .mdl-navigation__link:hover {\x0D
-      background-color: #00BCD4 !important;\x0D
-      color: #37474F !important;\x0D
-    }\x0D
+    """\x0D\x0D
+   .demo-options .mdl-checkbox__box-outline {\x0D\x0D
+      border-color: rgba(255, 255, 255, 0.89);\x0D\x0D
+    }\x0D\x0D
+\x0D\x0D
+   .mdl-layout__drawer {\x0D\x0D
+      border: none !important;\x0D\x0D
+   }\x0D\x0D
+\x0D\x0D
+   .mdl-layout__drawer .mdl-navigation__link:hover {\x0D\x0D
+      background-color: #00BCD4 !important;\x0D\x0D
+      color: #37474F !important;\x0D\x0D
+    }\x0D\x0D
    """
 
 
@@ -66,6 +66,7 @@ subs model =
         NotFoundRoute ->
             Sub.none
 
+
 init : Location -> Taco -> ( Model, Cmd Msg )
 init location taco =
     let
@@ -78,7 +79,7 @@ init location taco =
           , babelfishModel = babelfishModel
           , route = parseLocation location
           }
-        , Cmd.batch [Cmd.map BabelfishMsg babelfishCmd]
+        , Cmd.batch [ Cmd.map BabelfishMsg babelfishCmd ]
         )
 
 
@@ -123,12 +124,12 @@ update msg model =
         BabelfishMsg babelfishMsg ->
             updateBabelfish model babelfishMsg
 
+
 calculateNavigateUrlMessage : Int -> Cmd Msg
 calculateNavigateUrlMessage tabIndex =
     fromTabToRoute tabIndex
         |> reverseRoute
         |> Navigation.newUrl
-
 
 
 updateBabelfish : Model -> Babelfish.Msg -> ( Model, Cmd Msg, TacoUpdate )
@@ -141,11 +142,12 @@ updateBabelfish model babelfishMsg =
         , Cmd.map BabelfishMsg babelfishCmd
         , NoUpdate
         )
-        |> addSharedMsgToUpdate sharedMsg
+            |> addSharedMsgToUpdate sharedMsg
 
-addSharedMsgToUpdate : SharedMsg -> (Model, Cmd Msg, TacoUpdate) -> (Model, Cmd Msg, TacoUpdate)
-addSharedMsgToUpdate sharedMsg (model, msg, tacoUpdate) =
-      case sharedMsg of
+
+addSharedMsgToUpdate : SharedMsg -> ( Model, Cmd Msg, TacoUpdate ) -> ( Model, Cmd Msg, TacoUpdate )
+addSharedMsgToUpdate sharedMsg ( model, msg, tacoUpdate ) =
+    case sharedMsg of
         CreateSnackbarToast toastMessage ->
             let
                 ( snackModel, snackCmd ) =
@@ -160,9 +162,7 @@ addSharedMsgToUpdate sharedMsg (model, msg, tacoUpdate) =
                 )
 
         NoSharedMsg ->
-          (model, msg, tacoUpdate)
-
-
+            ( model, msg, tacoUpdate )
 
 
 view : Taco -> Model -> Html Msg
@@ -181,8 +181,9 @@ view taco model =
             , Options.css "align-items" "center"
             ]
             { header = [ viewHeader taco model ]
-            , drawer = [ drawerHeader model, viewDrawer model ]
-            -- , tabs = ( tabTitles, [] )
+            , drawer =
+                [ drawerHeader model, viewDrawer model ]
+                -- , tabs = ( tabTitles, [] )
             , tabs = ( [], [] )
             , main =
                 [ pageView taco model
@@ -203,8 +204,8 @@ viewHeader taco model =
         , Layout.spacer
         , Layout.navigation []
             [ Layout.link
-                [Layout.href "https://github.com/hakonrossebo/functional-programming-babelfish"]
-                [ span [] [ text "Fork me on Github"] ]
+                [ Layout.href "https://github.com/hakonrossebo/functional-programming-babelfish" ]
+                [ span [] [ text "Fork me on Github" ] ]
             ]
         ]
 
@@ -222,7 +223,7 @@ type alias MenuItem =
 
 tabTitles : List (Html Msg)
 tabTitles =
-    [ text "Cheat sheet", text "About"]
+    [ text "Cheat sheet", text "About" ]
 
 
 menuItems : List MenuItem
