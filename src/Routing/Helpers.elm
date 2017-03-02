@@ -9,7 +9,7 @@ reverseRoute : Route -> String
 reverseRoute route =
     case route of
         RouteAbout ->
-            "/#about"
+            "#/about"
 
         RouteBabelfish ->
             "#/"
