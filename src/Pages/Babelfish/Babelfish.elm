@@ -182,11 +182,6 @@ view taco model =
         ]
 
 
-showText : (List (Html.Attribute m) -> List (Html msg) -> a) -> Options.Property c m -> String -> a
-showText elementType displayStyle text_ =
-    Options.styled elementType [ displayStyle, Typo.left ] [ text text_ ]
-
-
 white : Options.Property a b
 white =
     Color.text Color.white

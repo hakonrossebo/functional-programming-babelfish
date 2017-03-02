@@ -12,7 +12,7 @@ import Material.Typography as Typo
 import Types exposing (Concept, LanguageImplementation, RowLanguageImplementations, Taco)
 import Pages.Babelfish.Helpers exposing (..)
 import Pages.Babelfish.Messages exposing (..)
-
+import Pages.Babelfish.Helpers exposing (..)
 
 
 viewConceptsMatrixSuccess : Taco -> List String -> Material.Model -> RowLanguageImplementations -> List ( RowLanguageImplementations, RowLanguageImplementations ) -> Html Msg
@@ -135,8 +135,3 @@ viewConceptLanguageDescription idx outerMdl descriptionText =
 viewConceptLanguage : String -> Html Msg
 viewConceptLanguage code =
     Table.td [ css "text-align" "left", cs "wrapword" ] [ text code ]
-
-
-showText : (List (Html.Attribute m) -> List (Html msg) -> a) -> Options.Property c m -> String -> a
-showText elementType displayStyle text_ =
-    Options.styled elementType [ displayStyle, Typo.left ] [ text text_ ]
