@@ -1,40 +1,40 @@
 
 module Pages.Babelfish.ConceptDetail exposing (..)
 import Html exposing (Html, text, div, span, p, a)
-import Html.Attributes exposing (href)
 import Material
-import Json.Decode as Json exposing (field)
-import Json.Encode
 import Material.Button as Button
 import Material.Options as Options exposing (when, css, cs, Style, onClick)
-import String
 import Material.Table as Table
 import Material.Icon as Icon
 import Material.Tooltip as Tooltip
-import Http exposing (Error)
 import Types exposing (Concept, LanguageImplementation, RowLanguageImplementations)
-import Dict
 import Pages.Babelfish.Helpers exposing (..)
 
-viewConceptItem : Int -> (RowLanguageImplementations, RowLanguageImplementations) -> Material.Model -> Html msg
-viewConceptItem idx (descRow, codeRow) outerMdl =
+viewConceptItem : Int -> (RowLanguageImplementations, RowLanguageImplementations) -> Material.Model -> (Material.Msg msg -> msg) -> (String -> msg) -> Html msg
+viewConceptItem idx (descRow, codeRow) outerMdl mdlMsg jump =
        let
          code =
            codeRow
            |> List.map (\row -> viewConceptLanguage row)
          desc =
            descRow
-           |> List.indexedMap (\idx row -> viewConceptLanguageDescription idx row)
+           |> List.indexedMap (\idx row -> viewConceptLanguageDescription idx outerMdl row mdlMsg jump)
        in
           List.append desc code
           |> Table.tr []
 
-viewConceptLanguageDescription : Int -> String -> Html msg
-viewConceptLanguageDescription idx descriptionText =
+viewConceptLanguageDescription : Int -> Material.Model -> String -> (Material.Msg msg -> msg) -> (String -> msg) -> Html msg
+viewConceptLanguageDescription idx outerMdl descriptionText mdlMsg jump =
     let
       content =
-        if idx == 99 then
-          [a [href <| "#" ++ createConceptNameId descriptionText] [text descriptionText]]
+        if idx == 0 then
+          [ Button.render mdlMsg [1, idx] outerMdl
+              [ Button.icon
+              , Options.onClick (jump <| createConceptNameId descriptionText )
+              ]
+              [ Icon.view "zoom_in" [ Tooltip.attach mdlMsg [1, idx ] ], Tooltip.render mdlMsg [1, idx ] outerMdl [ ] [ text "Go to details" ] ]
+          , text descriptionText
+          ]
         else
           [text descriptionText]
     in

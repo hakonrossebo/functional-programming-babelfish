@@ -12,16 +12,17 @@ import Material.Typography as Typo
 import Material.Table as Table
 import Material.Dialog as Dialog
 import Material.Menu as Menu
+import Material.Icon as Icon
+import Material.Tooltip as Tooltip
 import RemoteData exposing (WebData, RemoteData(..))
 import Types exposing (..)
 import Decoders exposing (..)
 import Http exposing (Error)
-import Dropdown
 import Pages.Babelfish.ConceptDetail as ConceptDetail
 import Pages.Babelfish.Helpers exposing (..)
+import CustomPorts exposing (..)
 import Dict
 import Markdown
-import Regex
 
 styles : String
 styles =
@@ -44,6 +45,7 @@ type Msg
     = Mdl (Material.Msg Msg)
     | ConceptsResponse (WebData (List Concept))
     | SelectLanguage String String
+    | ScrollToDomId String
 
 
 subs : Model -> Sub Msg
@@ -71,7 +73,6 @@ fetchData =
         [ fetchConcepts
         ]
 
-
 fetchConcepts : Cmd Msg
 fetchConcepts =
     Http.get "concepts.json" decodeConcepts
@@ -89,6 +90,9 @@ update msg model =
               Material.update Mdl msg_ model
           in
               (model_, cmd_, NoSharedMsg)
+
+        ScrollToDomId id ->
+          (model, scrollIdIntoView id, NoSharedMsg)
 
         ConceptsResponse response ->
             ( { model | concepts = response, conceptLanguagesViewModel = createConceptLanguagesViewModel model.displayLanguages response }, Cmd.none, NoSharedMsg)
@@ -221,7 +225,7 @@ viewConceptsSuccess taco model header rows =
               ]
         , Table.tbody []
             (rows
-                |> List.indexedMap (\idx item -> ConceptDetail.viewConceptItem idx item model.mdl )
+                |> List.indexedMap (\idx item -> ConceptDetail.viewConceptItem idx item model.mdl Mdl ScrollToDomId )
             )
         ]
 
@@ -270,22 +274,26 @@ viewFullConcepts taco model =
 viewFullConceptSuccess : Taco -> Model -> List Concept -> Html Msg
 viewFullConceptSuccess taco model data =
     data
-    |> List.map (\item -> viewFullConcept taco item)
+    |> List.indexedMap (\idx item -> viewFullConcept idx taco model.mdl item)
     |> div []
 
 
-viewFullConcept : Taco -> Concept -> Html Msg
-viewFullConcept taco concept =
+viewFullConcept : Int -> Taco -> Material.Model -> Concept -> Html Msg
+viewFullConcept idx taco outerMdl concept =
         grid [Options.id <| createConceptNameId concept.name, Options.css "max-width" "1280px" ]
             [ cell
                 [ size All 12
                 , Options.css "padding" "6px 4px"
                 , Options.css "display" "flex"
-                , Options.css "flex-direction" "column"
+                , Options.css "flex-direction" "row"
                 , Options.css "align-items" "left"
                 ]
-                [ showText div Typo.headline concept.name
-                -- , a [href "#top"][text "Back to top"]
+                [ Button.render Mdl [0, idx] outerMdl
+                    [ Button.icon
+                    , Options.onClick (ScrollToDomId "top")
+                    ]
+                    [ Icon.view "arrow_upward" [ Tooltip.attach Mdl [0, idx ] ], Tooltip.render Mdl [0, idx ] outerMdl [] [ text "Back to top" ] ]
+                  , showText span Typo.headline concept.name
                 ]
             , cell
                 [ size All 12
