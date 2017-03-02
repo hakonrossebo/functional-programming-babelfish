@@ -14,7 +14,6 @@ import Pages.Babelfish.Helpers exposing (..)
 import Pages.Babelfish.Messages exposing (..)
 import Pages.Babelfish.Helpers exposing (..)
 
-
 viewConceptsMatrixSuccess : Taco -> List String -> Material.Model -> RowLanguageImplementations -> List ( RowLanguageImplementations, RowLanguageImplementations ) -> Html Msg
 viewConceptsMatrixSuccess taco displayLanguages outerMdl header rows =
     let

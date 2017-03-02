@@ -3,7 +3,6 @@ module Pages.Babelfish.ViewFullConcepts exposing (..)
 import Html exposing (Html, text, div, span, p, a)
 import Html.Attributes exposing (href)
 import Material
-import Material.Menu as Menu
 import Material.Button as Button
 import Material.Options as Options exposing (when, css, cs, Style, onClick)
 import Material.Elevation as Elevation
@@ -17,7 +16,6 @@ import Markdown
 import Pages.Babelfish.Helpers exposing (..)
 import Pages.Babelfish.Messages exposing (..)
 import Pages.Babelfish.Helpers exposing (..)
-
 
 
 viewFullConceptSuccess : Taco -> Material.Model -> List Concept -> Html Msg

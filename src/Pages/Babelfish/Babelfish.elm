@@ -1,18 +1,13 @@
 module Pages.Babelfish.Babelfish exposing (..)
 
 import Html exposing (Html, text, div, span, p, a)
-import Html.Attributes exposing (href)
 import Material
 import Material.Grid as Grid exposing (grid, size, cell, Device(..))
 import Material.Elevation as Elevation
 import Material.Color as Color
-import Material.Button as Button
 import Material.Options as Options exposing (when, css, cs, Style, onClick)
 import Material.Typography as Typo
-import Material.Table as Table
 import Material.Menu as Menu
-import Material.Icon as Icon
-import Material.Tooltip as Tooltip
 import RemoteData exposing (WebData, RemoteData(..))
 import Types exposing (..)
 import Decoders exposing (..)
@@ -22,7 +17,6 @@ import Pages.Babelfish.ViewConceptMatrix as ViewConceptMatrix
 import Pages.Babelfish.ViewFullConcepts as ViewFullConcepts
 import Pages.Babelfish.Helpers exposing (..)
 import CustomPorts exposing (..)
-import Markdown
 
 styles : String
 styles =
