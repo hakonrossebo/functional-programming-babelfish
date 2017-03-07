@@ -3,7 +3,7 @@
 			"name": "Forward function application",
 			"description": "Apply / Pipe",
 			"index": 0,
-			"notes": "Applies an argument to a function. The Apply/Pipe-forward operator lets you pass an intermediate result onto the next function.",
+			"notes": "Applies an argument to a function. The Apply/Pipe-forward operator lets you pass an intermediate result onto the next function. The result of the left argument is passed as an argument to the right function. Data-oriented approach, more idiomatic in F# and Elm.",
 			"languages": [
 				{
 					"name": "Purescript",
@@ -16,11 +16,11 @@
 				{
 					"name": "Elm",
 					"code": "|>",
-					"example": "(|>) : a -> (a -> b) -> b\nresult = \n100\n  |>  add1\n  |>  times2\n202"
+          "example": "(|>) : a -> (a -> b) -> b\n\nemployeeBossStreet : Employee -> String\nemployeeBossStreet employee = \n  employee\n    |> boss\n    |> address\n    |> street\n\nemployeeBossStreet dummyEmployeeRecord\n>\"DummyEmployeeBossStreetName\" : String."
 				},				{
 					"name": "F#",
 					"code": "|>",
-					"example": "( |> ) : 'T1 -> ('T1 -> 'U) -> 'U \nlet result = \n100\n  |>  add1\n  |>  times2\n202"
+					"example": "( |> ) : 'T1 -> ('T1 -> 'U) -> 'U \n\nlet employeeBossStreet (employee: Employee) : string = \n  employee\n    |> boss\n    |> address\n    |> street\n\nemployeeBossStreet dummyEmployeeRecord\n>val it : string = \"DummyEmployeeBossStreetName\""
 				}
 			],
 			"links": [
@@ -35,6 +35,10 @@
 				{
 					"url": "http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics",
 					"description": "Elm core documentation"
+				},
+				{
+					"url": "https://www.reddit.com/r/haskell/comments/3mttyh/elms_operator/",
+					"description": "A discussion on idiomatic operators in Elm and Haskell"
 				}
 			]
 		},
@@ -42,7 +46,7 @@
 			"name": "Backward function application",
 			"description": "Apply / Pipe",
 			"index": 1,
-			"notes": "Applies a function to an argument. Can be used to avoid parentheses and improve readability.",
+			"notes": "Applies a function to an argument. Can be used to avoid parentheses and improve readability. The result of the right argument is applied to the left argument.",
 			"languages": [
 				{
 					"name": "Purescript",
@@ -80,35 +84,56 @@
 			]
 		},
 		{
-			"name": "Composition",
+			"name": "Composition - forward",
 			"description": "Forward/right",
+			"notes": "Creating a new, combined function by piping the result of the left argument to the right argument. A function-oriented approach, combining functions first, actual values input later.",
 			"index": 2,
 			"languages": [
 				{
 					"name": "Purescript",
-					"code": ">>>, composeFlipped"
+					"code": ">>>, composeFlipped",
+					"example": "compose :: forall a b c. (a -> b) -> (b -> c) -> a -> c\n\nbossStreet = (boss >>> address >>> street) employee"
+
 				},
 				{
 					"name": "Haskell",
-					"code": ">>>"
+					"code": ">>>",
+					"example": "bossStreet = (boss >>> address >>> street) employee"
 				},
 				{
 					"name": "Elm",
-					"code": ">>"
+					"code": ">>",
+					"example": "(>>) : (a -> b) -> (b -> c) -> a -> c\n\nbossStreet = (boss >> address >> street)\n<function> : Employee"
 				},				{
 					"name": "F#",
 					"code": ">>"
 				}
+			],
+			"links": [
+				{
+					"url": "https://wiki.haskell.org/Function_composition",
+					"description": "Haskell wiki"
+				},
+				{
+					"url": "https://fsharpforfunandprofit.com/posts/function-composition/",
+					"description": "F# for fun and profilt - function composition"
+				},
+				{
+					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#>>",
+					"description": "Elm - basics >>"
+				}
 			]
 		},
 		{
-			"name": "Composition",
+			"name": "Composition - backward",
 			"description": "Backward/left",
+			"notes": "Creating a new, combined function by piping the result of the right argument to the left argument. A function-oriented approach, combining functions first, actual values input later. More idiomatic in Purescript/Haskell.",
 			"index": 3,
 			"languages": [
 				{
 					"name": "Purescript",
-					"code": "<<<, compose"
+					"code": "<<<, compose",
+					"example": "compose :: forall a b c. (b -> c) -> (a -> b) -> a -> c\nbossStreet = (street <<< address <<< boss) employee"
 				},
 				{
 					"name": "Haskell",
@@ -120,6 +145,20 @@
 				},				{
 					"name": "F#",
 					"code": "<<"
+				}
+			],
+			"links": [
+				{
+					"url": "https://wiki.haskell.org/Function_composition",
+					"description": "Haskell wiki"
+				},
+				{
+					"url": "https://fsharpforfunandprofit.com/posts/function-composition/",
+					"description": "F# for fun and profilt - function composition"
+				},
+				{
+					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#<<",
+					"description": "Elm - basics <<"
 				}
 			]
 		},
