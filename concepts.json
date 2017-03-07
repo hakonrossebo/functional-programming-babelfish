@@ -61,11 +61,11 @@
 				{
 					"name": "Elm",
 					"code": "<|",
-					"example": "(a -> b) -> a -> b\n\nstreet (address (boss employee)) \nstreet <| address <| boss employee"
+					"example": "(<|) : (a -> b) -> a -> b\n\n--without operator\nemployeeBossStreet : Employee -> String\nemployeeBossStreet employee = \n  street (address (boss employee))\n\nemployeeBossStreet dummyEmployeeRecord\n>\"DummyEmployeeBossStreetName\" : String. \n\n-- with operator\nemployeeBossStreet : Employee -> String\nemployeeBossStreet employee = \n  street <| address <| boss employee\n\nemployeeBossStreet dummyEmployeeRecord\n>\"DummyEmployeeBossStreetName\" : String."
 				},				{
 					"name": "F#",
 					"code": "<|",
-					"example": "( <| ) : ('T -> 'U) -> 'T -> 'U\n(backward pipe operator)\nstreet (address (boss employee)) \nstreet <| address <| boss employee"
+        "example": "( <| ) : ('T -> 'U) -> 'T -> 'U\n\n//without operator\nlet employeeBossStreet (employee: Employee) : string =\n  street (address (boss employee))\n\nemployeeBossStreet dummyEmployeeRecord\n>val it : string = \"DummyEmployeeBossStreetName\" \n\n//with operator\nlet employeeBossStreet (employee: Employee) : string =\n  street <| address <| boss employee\n\nemployeeBossStreet dummyEmployeeRecord\n>val it : string = \"DummyEmployeeBossStreetName\""
 				}
 			],
 			"links": [
