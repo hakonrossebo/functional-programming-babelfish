@@ -77,7 +77,6 @@ viewFullConcept idx taco outerMdl concept =
             ]
         ]
 
-
 viewConceptNote : Maybe String -> Html Msg
 viewConceptNote note =
     case note of
@@ -189,8 +188,13 @@ viewLanguageConceptExample availableLanguages language =
             text ""
 
 
-viewLanguageConceptExampleContainer : String -> String -> String -> Html Msg
+viewLanguageConceptExampleContainer : String -> String -> List String -> Html Msg
 viewLanguageConceptExampleContainer name hightlightCodeName insideHtml =
+    let
+        combinedExample =
+            insideHtml
+            |> List.foldr (\first next -> String.append first (String.append "\n" next) ) ""
+    in
     Options.div
         [ --Elevation.e2
           -- , css "height" "196px"
@@ -202,7 +206,7 @@ viewLanguageConceptExampleContainer name hightlightCodeName insideHtml =
         , css "padding" "16px 16px 16px 16px"
         ]
         [ showText div Typo.caption name
-        , viewFormattedLanguageExample hightlightCodeName [] insideHtml
+        , viewFormattedLanguageExample hightlightCodeName [] combinedExample
         ]
 
 

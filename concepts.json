@@ -16,11 +16,31 @@
 				{
 					"name": "Elm",
 					"code": "|>",
-          "example": "(|>) : a -> (a -> b) -> b\n\nemployeeBossStreet : Employee -> String\nemployeeBossStreet employee = \n  employee\n    |> boss\n    |> address\n    |> street\n\nemployeeBossStreet dummyEmployeeRecord\n>\"DummyEmployeeBossStreetName\" : String."
+          "example": ["(|>) : a -> (a -> b) -> b",
+											"",
+											"employeeBossStreet : Employee -> String",
+											"employeeBossStreet employee =   employee",
+											"    |> boss",
+											"    |> address",
+											"    |> street",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\" : String."
+										]
 				},				{
 					"name": "F#",
 					"code": "|>",
-					"example": "( |> ) : 'T1 -> ('T1 -> 'U) -> 'U \n\nlet employeeBossStreet (employee: Employee) : string = \n  employee\n    |> boss\n    |> address\n    |> street\n\nemployeeBossStreet dummyEmployeeRecord\n>val it : string = \"DummyEmployeeBossStreetName\""
+					"example": ["( |> ) : 'T1 -> ('T1 -> 'U) -> 'U ",
+											"",
+											"let employeeBossStreet (employee: Employee) : string = ",
+											"  employee",
+											"    |> boss",
+											"    |> address",
+											"    |> street",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">val it : string = \"DummyEmployeeBossStreetName\""
+										]
 				}
 			],
 			"links": [
@@ -51,21 +71,63 @@
 				{
 					"name": "Purescript",
 					"code": "$, apply",
-					"example": "apply :: forall a b. (a -> b) -> a -> b\napply f x = f x\n\n= street (address (boss employee))\n= street $ address $ boss employee"
+					"example": ["apply :: forall a b. (a -> b) -> a -> b",
+											"apply f x = f x",
+											"",
+											"= street (address (boss employee))",
+											"= street $ address $ boss employee"
+										]
 				},
 				{
 					"name": "Haskell",
 					"code": "$",
-					"example": "($) :: (a -> b) -> a -> b\nF x = f x\n\n= street (address (boss employee))\n= street $ address $ boss employee"
+					"example": ["($) :: (a -> b) -> a -> b",
+											"F x = f x",
+											"",
+											"= street (address (boss employee))",
+											"= street $ address $ boss employee"
+										]
 				},
 				{
 					"name": "Elm",
 					"code": "<|",
-					"example": "(<|) : (a -> b) -> a -> b\n\n--without operator\nemployeeBossStreet : Employee -> String\nemployeeBossStreet employee = \n  street (address (boss employee))\n\nemployeeBossStreet dummyEmployeeRecord\n>\"DummyEmployeeBossStreetName\" : String. \n\n-- with operator\nemployeeBossStreet : Employee -> String\nemployeeBossStreet employee = \n  street <| address <| boss employee\n\nemployeeBossStreet dummyEmployeeRecord\n>\"DummyEmployeeBossStreetName\" : String."
+					"example": ["(<|) : (a -> b) -> a -> b",
+											"",
+											"--without operator",
+											"employeeBossStreet : Employee -> String",
+											"employeeBossStreet employee = ",
+											"  street (address (boss employee))",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\" : String. ",
+											"",
+											"-- with operator",
+											"employeeBossStreet : Employee -> String",
+											"employeeBossStreet employee = ",
+											"  street <| address <| boss employee",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\" : String."
+										]
 				},				{
 					"name": "F#",
 					"code": "<|",
-        "example": "( <| ) : ('T -> 'U) -> 'T -> 'U\n\n//without operator\nlet employeeBossStreet (employee: Employee) : string =\n  street (address (boss employee))\n\nemployeeBossStreet dummyEmployeeRecord\n>val it : string = \"DummyEmployeeBossStreetName\" \n\n//with operator\nlet employeeBossStreet (employee: Employee) : string =\n  street <| address <| boss employee\n\nemployeeBossStreet dummyEmployeeRecord\n>val it : string = \"DummyEmployeeBossStreetName\""
+        "example": [  "( <| ) : ('T -> 'U) -> 'T -> 'U",
+											"",
+											"//without operator",
+											"let employeeBossStreet (employee: Employee) : string =",
+											"  street (address (boss employee))",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">val it : string = \"DummyEmployeeBossStreetName\" ",
+											"",
+											"//with operator",
+											"let employeeBossStreet (employee: Employee) : string =",
+											"  street <| address <| boss employee",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">val it : string = \"DummyEmployeeBossStreetName\""
+										]
 				}
 			],
 			"links": [
@@ -92,18 +154,26 @@
 				{
 					"name": "Purescript",
 					"code": ">>>, composeFlipped",
-					"example": "compose :: forall a b c. (a -> b) -> (b -> c) -> a -> c\n\nbossStreet = (boss >>> address >>> street) employee"
+					"example": ["compose :: forall a b c. (a -> b) -> (b -> c) -> a -> c",
+											"",
+											"bossStreet = (boss >>> address >>> street) employee"
+										]
 
 				},
 				{
 					"name": "Haskell",
 					"code": ">>>",
-					"example": "bossStreet = (boss >>> address >>> street) employee"
+					"example": ["bossStreet = (boss >>> address >>> street) employee"
+										]
 				},
 				{
 					"name": "Elm",
 					"code": ">>",
-					"example": "(>>) : (a -> b) -> (b -> c) -> a -> c\n\nbossStreet = (boss >> address >> street)\n<function> : Employee"
+					"example": ["(>>) : (a -> b) -> (b -> c) -> a -> c",
+											"",
+											"bossStreet = (boss >> address >> street)",
+											"<function> : Employee"
+										]
 				},				{
 					"name": "F#",
 					"code": ">>"
@@ -133,7 +203,9 @@
 				{
 					"name": "Purescript",
 					"code": "<<<, compose",
-					"example": "compose :: forall a b c. (b -> c) -> (a -> b) -> a -> c\nbossStreet = (street <<< address <<< boss) employee"
+					"example": ["compose :: forall a b c. (b -> c) -> (a -> b) -> a -> c",
+											"bossStreet = (street <<< address <<< boss) employee"
+										]
 				},
 				{
 					"name": "Haskell",

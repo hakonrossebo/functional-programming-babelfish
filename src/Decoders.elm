@@ -60,10 +60,10 @@ decodeLanguageImplementation =
     Json.map3 LanguageImplementation
         (field "name" Json.string)
         (field "code" Json.string)
-        ((Json.maybe (field "example" Json.string)) |> Json.andThen decodeSuccessExample)
+        ((Json.maybe (field "example" (Json.list Json.string))) |> Json.andThen decodeSuccessExample)
 
 
-decodeSuccessExample : Maybe String -> Json.Decoder (Maybe String)
+decodeSuccessExample : Maybe (List String) -> Json.Decoder (Maybe (List String))
 decodeSuccessExample example =
     Json.succeed (Maybe.withDefault Nothing (Just example))
 
