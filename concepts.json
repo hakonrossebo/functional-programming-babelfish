@@ -74,8 +74,19 @@
 					"example": ["apply :: forall a b. (a -> b) -> a -> b",
 											"apply f x = f x",
 											"",
-											"= street (address (boss employee))",
-											"= street $ address $ boss employee"
+											"--without operator",
+											"employeeBossStreet :: Employee -> String",
+											"employeeBossStreet employee =",
+											"  street (address (boss employee))",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\"",
+											"",
+											"--with operator",
+											"employeeBossStreet :: Employee -> String",
+											"employeeBossStreet employee =",
+											"  street $ address $ boss employee",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\""
 										]
 				},
 				{
@@ -154,9 +165,14 @@
 				{
 					"name": "Purescript",
 					"code": ">>>, composeFlipped",
-					"example": ["compose :: forall a b c. (a -> b) -> (b -> c) -> a -> c",
+					"example": ["composeFlipped :: forall a b c d. Semigroupoid a => a b c -> a c d -> a b d",
 											"",
-											"bossStreet = (boss >>> address >>> street) employee"
+											"employeeBossStreet :: (Employee -> String)",
+											"employeeBossStreet =",
+											"  boss >>> address >>> street",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\""
 										]
 
 				},
@@ -171,8 +187,12 @@
 					"code": ">>",
 					"example": ["(>>) : (a -> b) -> (b -> c) -> a -> c",
 											"",
-											"bossStreet = (boss >> address >> street)",
-											"<function> : Employee"
+											"employeeBossStreet : (Employee -> String)",
+											"employeeBossStreet =",
+											"  boss >>> address >>> street",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\" : String."
 										]
 				},				{
 					"name": "F#",
