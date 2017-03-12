@@ -179,7 +179,7 @@
 				{
 					"name": "Haskell",
 					"code": ">>>",
-					"example": ["bossStreet = (boss >>> address >>> street) employee"
+					"example": ["employeeBossStreet = (boss >>> address >>> street) employee"
 										]
 				},
 				{
@@ -196,7 +196,15 @@
 										]
 				},				{
 					"name": "F#",
-					"code": ">>"
+					"code": ">>",
+					"example": ["(>>) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c",
+											"",
+											"let employeeBossStreet : (Employee -> string) =",
+											"  boss >>> address >>> street",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">val it : string = \"DummyEmployeeBossStreetName\""
+										]
 				}
 			],
 			"links": [
