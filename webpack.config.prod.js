@@ -1,11 +1,12 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require( 'path' );
 
 const paths = {
   entry: path.resolve('./src/index'),
   dist: path.resolve('./dist'),
-  template: path.resolve('./src/index.html'),
+  template: path.resolve('./src/index_prod.html'),
   favicon: path.resolve('./src/favicon.ico'),
   elmMake: path.resolve(__dirname, './node_modules/.bin/elm-make')
 }
@@ -25,7 +26,7 @@ module.exports = {
 
     filename: 'app-[hash]',
 
-    publicPath: '/'
+    publicPath: './'
   },
   resolve: {
     extensions: ['', '.js', '.elm']
@@ -58,7 +59,31 @@ module.exports = {
       inject: true,
       title: "Functional programming Babelfish",
       template: paths.template,
-      favicon: paths.favicon
-    })
+      favicon: paths.favicon,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
+    }),
+    new CleanWebpackPlugin(['dist'], {
+      verbose: true
+    }),
+     // Minify the compiled JavaScript.
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      }
+    }),
   ]
 };

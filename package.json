@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.27.3",
     "elm": "^0.18.0",
     "elm-hot-loader": "^0.5.4",
