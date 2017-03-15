@@ -2,13 +2,23 @@
   "name": "functionalprogrammingbabelfish",
   "version": "1.0.0",
   "description": "A viewer for functional programming concepts in different languages",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --inline",
+    "build": "webpack --config webpack.config.prod.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
+    "css-loader": "^0.27.3",
+    "elm": "^0.18.0",
+    "elm-hot-loader": "^0.5.4",
+    "elm-webpack-loader": "^4.1.1",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "2.24.1",
+    "style-loader": "^0.14.0",
+    "webpack": "1.14.0",
+    "webpack-dev-server": "1.16.2"
   }
 }
