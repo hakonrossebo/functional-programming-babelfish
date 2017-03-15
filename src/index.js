@@ -4,6 +4,7 @@ require('file?name=concepts.json!../concepts.json');
 require('file?name=/images/elm.png!../images/elm.png');
 require('file?name=/assets/highlight/solarized-dark.css!../assets/highlight/solarized-dark.css');
 require('file?name=/assets/highlight/highlight.pack.js!../assets/highlight/highlight.pack.js');
+require('file?name=/assets/analytics.js!../assets/analytics.js');
 
 var Elm = require('./Main.elm');
 
