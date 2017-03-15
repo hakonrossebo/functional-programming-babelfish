@@ -5,7 +5,7 @@ const path = require( 'path' );
 
 const paths = {
   entry: path.resolve('./src/index'),
-  dist: path.resolve('./dist'),
+  dist: path.resolve('./docs'),
   template: path.resolve('./src/index_prod.html'),
   favicon: path.resolve('./src/favicon.ico'),
   elmMake: path.resolve(__dirname, './node_modules/.bin/elm-make')
@@ -73,7 +73,7 @@ module.exports = {
         minifyURLs: true
       }
     }),
-    new CleanWebpackPlugin(['dist'], {
+    new CleanWebpackPlugin(['docs'], {
       verbose: true
     }),
      // Minify the compiled JavaScript.
