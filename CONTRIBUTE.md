@@ -15,7 +15,7 @@ There are two separate files
 ##### With Elm installed
 [Install Elm here](https://elm-lang.org)
 
-```Clone repo and use the npm package "create-elm-app" to run the application with "elm-app start"```
+```Clone repo and use npm start to run development. Use npm run build for production."```
 
 ##### Without Elm installed
 ```Clone repo and use a nodejs http server like http-server to run inside the "docs folder. Copy the .json files to root when finished."```
