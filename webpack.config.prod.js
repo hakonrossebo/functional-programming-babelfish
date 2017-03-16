@@ -46,7 +46,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: [ /elm-stuff/, /node_modules/ ],
+        exclude: [ /elm-stuff/, /node_modules/, /assets/ ],
         loader: "style-loader!css-loader"
       }
     ]
