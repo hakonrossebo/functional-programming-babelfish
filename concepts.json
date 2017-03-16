@@ -194,7 +194,8 @@
 											"employeeBossStreet dummyEmployeeRecord",
 											">\"DummyEmployeeBossStreetName\" : String."
 										]
-				},				{
+				},
+				{
 					"name": "F#",
 					"code": ">>",
 					"example": ["(>>) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c",
@@ -232,19 +233,45 @@
 					"name": "Purescript",
 					"code": "<<<, compose",
 					"example": ["compose :: forall a b c. (b -> c) -> (a -> b) -> a -> c",
-											"bossStreet = (street <<< address <<< boss) employee"
+											"",
+											"employeeBossStreet :: (Employee -> String)",
+											"employeeBossStreet =",
+											"  street <<< address <<< boss",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\""
 										]
 				},
 				{
 					"name": "Haskell",
-					"code": "."
+					"code": ".",
+					"example": ["employeeBossStreet = (street <<< address <<< boss) employee"
+										]
 				},
 				{
 					"name": "Elm",
-					"code": "<<"
-				},				{
+					"code": "<<",
+					"example": ["(<<) : (b -> c) -> (a -> b) -> a -> c",
+											"",
+											"employeeBossStreet : (Employee -> String)",
+											"employeeBossStreet =",
+											"  street << address << boss",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\" : String."
+										]
+				},
+				{
 					"name": "F#",
-					"code": "<<"
+					"code": "<<",
+					"example": ["(<<) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c",
+											"",
+											"let employeeBossStreet : (Employee -> string) =",
+											"  street << address << boss",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">val it : string = \"DummyEmployeeBossStreetName\""
+										]
 				}
 			],
 			"links": [
@@ -544,6 +571,46 @@
 				},				{
 					"name": "F#",
 					"code": "bind"
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"description": "",
+			"index": 3,
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "-- Line {- Block -} --| Documentation"
+				},
+				{
+					"name": "Haskell",
+					"code": "-- Line {- Block -} --| Documentation"
+				},
+				{
+					"name": "Elm",
+					"code": "-- Line {- Block -}"
+				},				{
+					"name": "F#",
+					"code": "// Line (* Block *)"
+				}
+			],
+			"links": [
+				{
+					"url": "https://github.com/purescript/documentation/blob/master/language/Syntax.md#comments",
+					"description": "Purescript comments"
+				},
+				{
+					"url": "http://elm-lang.org/docs/syntax#comments",
+					"description": "Elm comments"
+				},
+				{
+					"url": "https://dungpa.github.io/fsharp-cheatsheet/",
+					"description": "F# Cheatsheet"
+				},
+				{
+					"url": "https://wiki.haskell.org/Reference_card#Comments",
+					"description": "Haskell reference card"
 				}
 			]
 		}
