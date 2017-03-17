@@ -194,7 +194,8 @@
 											"employeeBossStreet dummyEmployeeRecord",
 											">\"DummyEmployeeBossStreetName\" : String."
 										]
-				},				{
+				},
+				{
 					"name": "F#",
 					"code": ">>",
 					"example": ["(>>) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c",
@@ -232,19 +233,45 @@
 					"name": "Purescript",
 					"code": "<<<, compose",
 					"example": ["compose :: forall a b c. (b -> c) -> (a -> b) -> a -> c",
-											"bossStreet = (street <<< address <<< boss) employee"
+											"",
+											"employeeBossStreet :: (Employee -> String)",
+											"employeeBossStreet =",
+											"  street <<< address <<< boss",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\""
 										]
 				},
 				{
 					"name": "Haskell",
-					"code": "."
+					"code": ".",
+					"example": ["employeeBossStreet = (street <<< address <<< boss) employee"
+										]
 				},
 				{
 					"name": "Elm",
-					"code": "<<"
-				},				{
+					"code": "<<",
+					"example": ["(<<) : (b -> c) -> (a -> b) -> a -> c",
+											"",
+											"employeeBossStreet : (Employee -> String)",
+											"employeeBossStreet =",
+											"  street << address << boss",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">\"DummyEmployeeBossStreetName\" : String."
+										]
+				},
+				{
 					"name": "F#",
-					"code": "<<"
+					"code": "<<",
+					"example": ["(<<) : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c",
+											"",
+											"let employeeBossStreet : (Employee -> string) =",
+											"  street << address << boss",
+											"",
+											"employeeBossStreet dummyEmployeeRecord",
+											">val it : string = \"DummyEmployeeBossStreetName\""
+										]
 				}
 			],
 			"links": [
@@ -395,7 +422,7 @@
 		},
 		{
 			"name": "Union types",
-			"description": "",
+			"description": "Sum types / Discriminated unions / Algebraic data types (ADT)",
 			"index": 3,
 			"languages": [
 				{
@@ -544,6 +571,212 @@
 				},				{
 					"name": "F#",
 					"code": "bind"
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"description": "",
+			"index": 3,
+			"notes": "Single line comments, block comments and documentation comments.",
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "-- Line {- Block -} --| Documentation",
+          "example": ["-- A single line comment",
+											"{-",
+											"  Comment",
+											"  continued comment {- Nested block -}",
+											"-}",
+											"-- | Comments that start with a pipe character, |, are considered documentation, and will appear in the output of tools like psc-docs and Pursuit.",
+											"-- | Adds two numbers",
+											"-- This comment does not start with a pipe and will not be part of the documentation",
+											"add :: Int -> Int -> Int",
+											"add x y = x + y"
+										]
+				},
+				{
+					"name": "Haskell",
+					"code": "-- Line {- Block -} --| Documentation",
+          "example": ["-- A single line comment",
+											"{-",
+											"  Comment",
+											"  continued comment {- Nested block -}",
+											"-}",
+											"-- | Comments that start with a pipe character, |, are considered documentation, and will appear in the output of documentation tools.",
+											"-- | Adds two numbers",
+											"add :: Int -> Int -> Int",
+											"add x y = x + y"
+										]
+				},
+				{
+					"name": "Elm",
+					"code": "-- Line {- Block -}",
+          "example": ["-- A single line comment",
+											"{-",
+											"  Comment",
+											"  continued comment {- Nested block -}",
+											"-}",
+											"{- Block comments that start with a pipe character, |, are ",
+											"considered documentation, and will",
+											"appear in the output package documentation.",
+											"",
+											"@docs add",
+											"To output documentation, @docs keyword precedes a comma-separated list of values",
+											"The @docs add, will document the comment preceeding the add function.",
+											"-}",
+											"{-|",
+											"Adds two numbers",
+											"-}",
+											"add : Int -> Int -> Int",
+											"add x y = x + y"
+										]
+				},				{
+					"name": "F#",
+					"code": "// Line (* Block *)",
+          "example": ["// A single line comment",
+											"(*",
+											"  Comment",
+											"  continued comment",
+											"*)",
+											"// XML documentation comments come after ///",
+											"/// Adds two numbers",
+											"let add (x:int) (y:int) = x + y"
+										]
+				}
+			],
+			"links": [
+				{
+					"url": "https://github.com/purescript/documentation/blob/master/language/Syntax.md#comments",
+					"description": "Purescript comments"
+				},
+				{
+					"url": "http://elm-lang.org/docs/syntax#comments",
+					"description": "Elm comments"
+				},
+				{
+					"url": "http://package.elm-lang.org/help/documentation-format",
+					"description": "Elm package documentation"
+				},
+				{
+					"url": "https://dungpa.github.io/fsharp-cheatsheet/",
+					"description": "F# Cheatsheet"
+				},
+				{
+					"url": "https://wiki.haskell.org/Reference_card#Comments",
+					"description": "Haskell reference card"
+				}
+			]
+		},
+		{
+			"name": "Type annotation",
+			"description": "Function definition",
+			"index": 3,
+			"notes": "Annotating types can in many situations be omitted due to type inference, but can improve readability.",
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "add :: Int -> Int -> Int",
+          "example": ["add :: Int -> Int -> Int",
+											"add x y = x + y",
+											"",
+											"-- Using universally quantified types (generic)",
+											"flip :: forall a b c. (a -> b -> c) -> b -> a -> c",
+											"flip f b a = f a b"
+										]
+				},
+				{
+					"name": "Haskell",
+					"code": "add :: Int -> Int -> Int",
+          "example": ["add :: Int -> Int -> Int",
+											"add x y = x + y",
+											"",
+											"-- Using generic types (any type)",
+											"flip :: (a -> b -> c) -> b -> a -> c",
+											"flip f b a = f a b"
+										]
+				},
+				{
+					"name": "Elm",
+					"code": "add : Int -> Int -> Int",
+          "example": ["add : Int -> Int -> Int",
+											"add x y = x + y",
+											"",
+											"-- Using generic types (any type)",
+											"flip : (a -> b -> c) -> b -> a -> c",
+											"flip f b a = f a b"
+										]
+				},				{
+					"name": "F#",
+					"code": "let add (x:int) (y:int) : int = x + y",
+          "example": ["let add (x:int) (y:int) : int = x + y"
+										]
+				}
+			],
+			"links": [
+				{
+					"url": "http://elm-lang.org/docs/syntax#type-annotations",
+					"description": "Elm type annnotations"
+				},
+				{
+					"url": "https://fsharpforfunandprofit.com/posts/function-signatures/",
+					"description": "F# for fun and profit function signatures"
+				},
+				{
+					"url": "http://learnyouahaskell.com/types-and-typeclasses",
+					"description": "Haskell types and typeclasses"
+				}
+			]
+		},
+		{
+			"name": "Generic types",
+			"description": "Type variables",
+			"index": 3,
+			"notes": "Generic functions and types enable you to write code that works with a variety of types without repeating the code for each type. Type variables/generic types can have names longer than one character, but usually given one character names.",
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "forall a b.",
+          "example": ["-- Any lowercase identifier can be used, like a, msg.",
+											"flip :: forall a b c. (a -> b -> c) -> b -> a -> c"
+										]
+				},
+				{
+					"name": "Haskell",
+					"code": "a b",
+          "example": ["-- Any lowercase identifier can be used, like a, msg.",
+											"flip :: (a -> b -> c) -> b -> a -> c"
+										]
+				},
+				{
+					"name": "Elm",
+					"code": "a b",
+          "example": ["-- Any lowercase identifier can be used, like a, msg.",
+											"flip : (a -> b -> c) -> b -> a -> c"
+										]
+				},				{
+					"name": "F#",
+					"code": "'a 'b 'C",
+          "example": ["// Generics are identified by ' and can use upper/lowercase, like 'a, 'Msg.",
+											"val flip = ('a -> 'b -> 'c) -> 'b -> 'a -> 'c",
+											"// Can also use <type-parameter in angle brackets:",
+											"let function2<'T> x y =",
+											"    printfn \"%A, %A\" x y"
+										]
+				}
+			],
+			"links": [
+				{
+					"url": "https://www.tutorialspoint.com/fsharp/fsharp_generics.htm",
+					"description": "F# Generics"
+				},
+				{
+					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/generics/",
+					"description": "F# Generics - Microsoft F# language reference"
+				},
+				{
+					"url": "https://www.elm-tutorial.org/en/01-foundations/03-functions-2.html",
+					"description": "Elm tutorial - functions"
 				}
 			]
 		}
