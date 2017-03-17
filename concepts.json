@@ -422,7 +422,7 @@
 		},
 		{
 			"name": "Union types",
-			"description": "",
+			"description": "Sum types / Discriminated unions / Algebraic data types (ADT)",
 			"index": 3,
 			"languages": [
 				{
@@ -665,6 +665,118 @@
 				{
 					"url": "https://wiki.haskell.org/Reference_card#Comments",
 					"description": "Haskell reference card"
+				}
+			]
+		},
+		{
+			"name": "Type annotation",
+			"description": "Function definition",
+			"index": 3,
+			"notes": "Annotating types can in many situations be omitted due to type inference, but can improve readability.",
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "add :: Int -> Int -> Int",
+          "example": ["add :: Int -> Int -> Int",
+											"add x y = x + y",
+											"",
+											"-- Using universally quantified types (generic)",
+											"flip :: forall a b c. (a -> b -> c) -> b -> a -> c",
+											"flip f b a = f a b"
+										]
+				},
+				{
+					"name": "Haskell",
+					"code": "add :: Int -> Int -> Int",
+          "example": ["add :: Int -> Int -> Int",
+											"add x y = x + y",
+											"",
+											"-- Using generic types (any type)",
+											"flip :: (a -> b -> c) -> b -> a -> c",
+											"flip f b a = f a b"
+										]
+				},
+				{
+					"name": "Elm",
+					"code": "add : Int -> Int -> Int",
+          "example": ["add : Int -> Int -> Int",
+											"add x y = x + y",
+											"",
+											"-- Using generic types (any type)",
+											"flip : (a -> b -> c) -> b -> a -> c",
+											"flip f b a = f a b"
+										]
+				},				{
+					"name": "F#",
+					"code": "let add (x:int) (y:int) : int = x + y",
+          "example": ["let add (x:int) (y:int) : int = x + y"
+										]
+				}
+			],
+			"links": [
+				{
+					"url": "http://elm-lang.org/docs/syntax#type-annotations",
+					"description": "Elm type annnotations"
+				},
+				{
+					"url": "https://fsharpforfunandprofit.com/posts/function-signatures/",
+					"description": "F# for fun and profit function signatures"
+				},
+				{
+					"url": "http://learnyouahaskell.com/types-and-typeclasses",
+					"description": "Haskell types and typeclasses"
+				}
+			]
+		},
+		{
+			"name": "Generic types",
+			"description": "Type variables",
+			"index": 3,
+			"notes": "Generic functions and types enable you to write code that works with a variety of types without repeating the code for each type. Type variables/generic types can have names longer than one character, but usually given one character names.",
+			"languages": [
+				{
+					"name": "Purescript",
+					"code": "forall a b.",
+          "example": ["-- Any lowercase identifier can be used, like a, msg.",
+											"flip :: forall a b c. (a -> b -> c) -> b -> a -> c"
+										]
+				},
+				{
+					"name": "Haskell",
+					"code": "a b",
+          "example": ["-- Any lowercase identifier can be used, like a, msg.",
+											"flip :: (a -> b -> c) -> b -> a -> c"
+										]
+				},
+				{
+					"name": "Elm",
+					"code": "a b",
+          "example": ["-- Any lowercase identifier can be used, like a, msg.",
+											"flip : (a -> b -> c) -> b -> a -> c"
+										]
+				},				{
+					"name": "F#",
+					"code": "'a 'b 'C",
+          "example": ["// Generics are identified by ' and can use upper/lowercase, like 'a, 'Msg.",
+											"val flip = ('a -> 'b -> 'c) -> 'b -> 'a -> 'c",
+											"// Can also use <type-parameter in angle brackets:",
+											"let function2<'T> x y =",
+											"    printfn \"%A, %A\" x y"
+										]
+				}
+			],
+			"links": [
+				{
+					"url": "https://www.tutorialspoint.com/fsharp/fsharp_generics.htm",
+					"description": "F# Generics"
+				},
+				{
+					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/generics/",
+					"description": "F# Generics - Microsoft F# language reference"
+				},
+				{
+					"url": "https://www.elm-tutorial.org/en/01-foundations/03-functions-2.html",
+					"description": "Elm tutorial - functions"
 				}
 			]
 		}
