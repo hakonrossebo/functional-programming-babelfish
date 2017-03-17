@@ -578,21 +578,71 @@
 			"name": "Comments",
 			"description": "",
 			"index": 3,
+			"notes": "Single line comments, block comments and documentation comments.",
 			"languages": [
 				{
 					"name": "Purescript",
-					"code": "-- Line {- Block -} --| Documentation"
+					"code": "-- Line {- Block -} --| Documentation",
+          "example": ["-- A single line comment",
+											"{-",
+											"  Comment",
+											"  continued comment {- Nested block -}",
+											"-}",
+											"-- | Comments that start with a pipe character, |, are considered documentation, and will appear in the output of tools like psc-docs and Pursuit.",
+											"-- | Adds two numbers",
+											"-- This comment does not start with a pipe and will not be part of the documentation",
+											"add :: Int -> Int -> Int",
+											"add x y = x + y"
+										]
 				},
 				{
 					"name": "Haskell",
-					"code": "-- Line {- Block -} --| Documentation"
+					"code": "-- Line {- Block -} --| Documentation",
+          "example": ["-- A single line comment",
+											"{-",
+											"  Comment",
+											"  continued comment {- Nested block -}",
+											"-}",
+											"-- | Comments that start with a pipe character, |, are considered documentation, and will appear in the output of documentation tools.",
+											"-- | Adds two numbers",
+											"add :: Int -> Int -> Int",
+											"add x y = x + y"
+										]
 				},
 				{
 					"name": "Elm",
-					"code": "-- Line {- Block -}"
+					"code": "-- Line {- Block -}",
+          "example": ["-- A single line comment",
+											"{-",
+											"  Comment",
+											"  continued comment {- Nested block -}",
+											"-}",
+											"{- Block comments that start with a pipe character, |, are ",
+											"considered documentation, and will",
+											"appear in the output package documentation.",
+											"",
+											"@docs add",
+											"To output documentation, @docs keyword precedes a comma-separated list of values",
+											"The @docs add, will document the comment preceeding the add function.",
+											"-}",
+											"{-|",
+											"Adds two numbers",
+											"-}",
+											"add : Int -> Int -> Int",
+											"add x y = x + y"
+										]
 				},				{
 					"name": "F#",
-					"code": "// Line (* Block *)"
+					"code": "// Line (* Block *)",
+          "example": ["// A single line comment",
+											"(*",
+											"  Comment",
+											"  continued comment",
+											"*)",
+											"// XML documentation comments come after ///",
+											"/// Adds two numbers",
+											"let add (x:int) (y:int) = x + y"
+										]
 				}
 			],
 			"links": [
@@ -603,6 +653,10 @@
 				{
 					"url": "http://elm-lang.org/docs/syntax#comments",
 					"description": "Elm comments"
+				},
+				{
+					"url": "http://package.elm-lang.org/help/documentation-format",
+					"description": "Elm package documentation"
 				},
 				{
 					"url": "https://dungpa.github.io/fsharp-cheatsheet/",
