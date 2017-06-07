@@ -1,0 +1,28 @@
+{
+    "version": "0.1.0",
+    "tasks": [
+        {
+            "taskName": "npm start",
+            "command": "npm",
+            "isShellCommand": true,
+            "args": ["start"],
+            "showOutput": "always"
+        },
+        {
+            "taskName": "npm build",
+            "command": "npm",
+            "args": ["run", "build"],
+            "isBuildCommand": true,
+            "isShellCommand": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "elm-test",
+            "command": "elm-test",
+            "args": [],
+            "isTestCommand": true,
+            "isShellCommand": true,
+            "showOutput": "always"
+        }
+    ]
+}
