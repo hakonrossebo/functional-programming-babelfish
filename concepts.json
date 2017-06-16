@@ -373,7 +373,7 @@
 					"code": "(Int, String)"
 				},				{
 					"name": "F#",
-					"code": "inx * string"
+					"code": "int * string"
 				}
 			]
 		},
