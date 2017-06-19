@@ -1,4 +1,4 @@
-# Functional programming babelfish
+# [Functional programming babelfish](https://hakonrossebo.github.io/functional-programming-babelfish/)
 
 ##  [Site is located on Github pages here](https://hakonrossebo.github.io/functional-programming-babelfish/)
 Please [contribute](CONTRIBUTE.md) with PR's and issues to help improve this reference.
