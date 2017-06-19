@@ -53,8 +53,8 @@
 					"description": "Stack Overflow discussion"
 				},
 				{
-					"url": "http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics",
-					"description": "Elm core documentation"
+					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#|>",
+					"description": "Elm Basics - (|>)"
 				},
 				{
 					"url": "https://www.reddit.com/r/haskell/comments/3mttyh/elms_operator/",
@@ -149,6 +149,10 @@
 				{
 					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/functions/index",
 					"description": "F# functions reference"
+				},
+				{
+					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#<|",
+					"description": "Elm Basics - (<|)"
 				},
 				{
 					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/symbol-and-operator-reference/",
@@ -285,7 +289,7 @@
 				},
 				{
 					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#<<",
-					"description": "Elm - basics <<"
+					"description": "Elm Basics - (<<)"
 				}
 			]
 		},
@@ -523,7 +527,7 @@
 				},
 				{
 					"name": "Elm",
-					"code": ""
+					"code": "andMap"
 				},				{
 					"name": "F#",
 					"code": "apply"
