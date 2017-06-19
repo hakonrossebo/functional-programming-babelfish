@@ -53,8 +53,8 @@
 					"description": "Stack Overflow discussion"
 				},
 				{
-					"url": "http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Basics",
-					"description": "Elm core documentation"
+					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#|>",
+					"description": "Elm Basics - (|>)"
 				},
 				{
 					"url": "https://www.reddit.com/r/haskell/comments/3mttyh/elms_operator/",
@@ -145,6 +145,10 @@
 				{
 					"url": "https://pursuit.purescript.org/packages/purescript-prelude/2.1.0/docs/Prelude#v:($)",
 					"description": "Purescript $ reference"
+				},
+				{
+					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#<|",
+					"description": "Elm Basics - (<|)"
 				},
 				{
 					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/functions/index",
@@ -287,7 +291,7 @@
 				},
 				{
 					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#<<",
-					"description": "Elm - basics <<"
+					"description": "Elm - basics (<<)"
 				}
 			]
 		},
@@ -513,6 +517,7 @@
 		{
 			"name": "Functor apply",
 			"description": "Apply",
+			"notes" : "*andMap is not core in Elm, but is often used in Packages.",
 			"index": 3,
 			"languages": [
 				{
@@ -525,10 +530,16 @@
 				},
 				{
 					"name": "Elm",
-					"code": ""
+					"code": "andMap(*notes)"
 				},				{
 					"name": "F#",
 					"code": "apply"
+				}
+			],
+			"links": [
+				{
+					"url": "http://klaftertief.github.io/elm-search/?q=andMap",
+					"description": "Elm - External packages using andMap"
 				}
 			]
 		},
