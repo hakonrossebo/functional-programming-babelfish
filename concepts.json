@@ -226,7 +226,7 @@
 		{
 			"name": "Composition - backward",
 			"description": "Backward/left",
-			"notes": "Creating a new, combined function by piping the result of the right argument to the left argument. A function-oriented approach, combining functions first, actual values input later. More idiomatic in Purescript/Haskell.",
+			"notes": "Creating a new, combined function by piping the result of the right argument to the left argument. A function-oriented approach, combining functions first, actual values input later. More idiomatic in Purescript/Haskell. The Control.Arrow module in Haskell base has (<<<) in addition to (>>>). For function arrows, (<<<) specializes to (.).",
 			"index": 3,
 			"languages": [
 				{
