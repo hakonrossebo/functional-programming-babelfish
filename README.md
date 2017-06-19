@@ -1,6 +1,6 @@
 # Functional programming babelfish
 
-##  [Note - Content has moved to Github pages here](https://hakonrossebo.github.io/functional-programming-babelfish/)
+##  [Site is located on Github pages here](https://hakonrossebo.github.io/functional-programming-babelfish/)
 Please [contribute](CONTRIBUTE.md) with PR's and issues to help improve this reference.
 Any new languages would be very helpful.
 
