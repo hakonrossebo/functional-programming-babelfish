@@ -147,12 +147,12 @@
 					"description": "Purescript $ reference"
 				},
 				{
-					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/functions/index",
-					"description": "F# functions reference"
-				},
-				{
 					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#<|",
 					"description": "Elm Basics - (<|)"
+				},
+				{
+					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/functions/index",
+					"description": "F# functions reference"
 				},
 				{
 					"url": "https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/symbol-and-operator-reference/",
@@ -230,7 +230,7 @@
 		{
 			"name": "Composition - backward",
 			"description": "Backward/left",
-			"notes": "Creating a new, combined function by piping the result of the right argument to the left argument. A function-oriented approach, combining functions first, actual values input later. More idiomatic in Purescript/Haskell.",
+			"notes": "Creating a new, combined function by piping the result of the right argument to the left argument. A function-oriented approach, combining functions first, actual values input later. More idiomatic in Purescript/Haskell. The Control.Arrow module in Haskell base has (<<<) in addition to (>>>). For function arrows, (<<<) specializes to (.).",
 			"index": 3,
 			"languages": [
 				{
@@ -248,8 +248,10 @@
 				},
 				{
 					"name": "Haskell",
-					"code": ".",
-					"example": ["employeeBossStreet = (street <<< address <<< boss) employee"
+					"code": "<<<, .",
+					"example": ["employeeBossStreet = (street . address . boss) employee",
+								"",
+								"employeeBossStreet = (street <<< address <<< boss) employee"
 										]
 				},
 				{
@@ -289,7 +291,7 @@
 				},
 				{
 					"url": "http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#<<",
-					"description": "Elm Basics - (<<)"
+					"description": "Elm - basics (<<)"
 				}
 			]
 		},
@@ -377,7 +379,7 @@
 					"code": "(Int, String)"
 				},				{
 					"name": "F#",
-					"code": "inx * string"
+					"code": "int * string"
 				}
 			]
 		},
@@ -515,6 +517,7 @@
 		{
 			"name": "Functor apply",
 			"description": "Apply",
+			"notes" : "*andMap is not core in Elm, but is often used in Packages.",
 			"index": 3,
 			"languages": [
 				{
@@ -527,10 +530,16 @@
 				},
 				{
 					"name": "Elm",
-					"code": "andMap"
+					"code": "andMap(*notes)"
 				},				{
 					"name": "F#",
 					"code": "apply"
+				}
+			],
+			"links": [
+				{
+					"url": "http://klaftertief.github.io/elm-search/?q=andMap",
+					"description": "Elm - External packages using andMap"
 				}
 			]
 		},
