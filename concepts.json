@@ -245,7 +245,9 @@
 				{
 					"name": "Haskell",
 					"code": "<<<, .",
-					"example": ["employeeBossStreet = (street <<< address <<< boss) employee"
+					"example": ["employeeBossStreet = (street . address . boss) employee",
+								"",
+								"employeeBossStreet = (street <<< address <<< boss) employee"
 										]
 				},
 				{
