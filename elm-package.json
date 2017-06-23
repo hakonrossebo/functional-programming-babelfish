@@ -4,7 +4,6 @@
     "repository": "https://github.com/hakonrossebo/functional-programming-babelfish.git",
     "license": "MIT",
     "source-directories": [
-        ".",
         "./src"
     ],
     "exposed-modules": [],
