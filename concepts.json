@@ -193,7 +193,7 @@
 											"",
 											"employeeBossStreet : (Employee -> String)",
 											"employeeBossStreet =",
-											"  boss >>> address >>> street",
+											"  boss >> address >> street",
 											"",
 											"employeeBossStreet dummyEmployeeRecord",
 											">\"DummyEmployeeBossStreetName\" : String."
@@ -205,7 +205,7 @@
 					"example": ["(>>) : ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c",
 											"",
 											"let employeeBossStreet : (Employee -> string) =",
-											"  boss >>> address >>> street",
+											"  boss >> address >> street",
 											"",
 											"employeeBossStreet dummyEmployeeRecord",
 											">val it : string = \"DummyEmployeeBossStreetName\""
