@@ -346,7 +346,7 @@
 			"languages": [
 				{
 					"name": "Purescript",
-					"code": "id"
+					"code": "identity"
 				},
 				{
 					"name": "Haskell",
@@ -433,7 +433,7 @@
 			"languages": [
 				{
 					"name": "Purescript",
-					"code": "data Shape Circle Point Int | Line Point Point"
+					"code": "data Shape = Circle Point Int | Line Point Point"
 				},
 				{
 					"name": "Haskell",
